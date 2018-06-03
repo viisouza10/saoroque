@@ -1,0 +1,111 @@
+<html >
+        [#header#]
+        <body>
+          [#topo#]
+          <div class="container-fluid">
+            <div class="row">
+              [#sidemenu#]
+
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <div class="row">
+                  <div class="col-md-11"><h1 class="page-header">Favorito</h1></div>
+                  <div class="col-md-1"><a href="/favorito"><button type="button" data-tip="Voltar"  onclick="goBack()" class="btn tool btn-lg btn-block"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button></a></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title"> <span class="glyphicon glyphicon-plus"></span> Ver favorito</h3>
+                        </div>
+                        <div class="panel-body">
+                          <form id="form-alt" method="POST" class="form-adicionar" enctype="multipart/form-data">
+                          <input type="hidden" name="id" value="[#id#]" />
+                            <div class="row">
+                            <div class="col-md-4">
+              <label for="cliente">cliente*</label>
+              <select name="cliente_id" id="cliente_id" class="form-control required" >
+                [#select_cliente#]
+              </select>
+          </div><div class="col-md-4">
+              <label for="estabelecimento">estabelecimento*</label>
+              <select name="estabelecimento_id" id="estabelecimento_id" class="form-control required" >
+                [#select_estabelecimento#]
+              </select>
+          </div><div class="col-md-4">
+              <label for="favorito">favorito*</label>
+              <input disabled type="text" value="[#favorito#]" name="favorito" id="favorito" class="form-control required" placeholder="favorito do favorito">
+          </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="panel-footer text-right">
+                          <button id="desbloqueia" class="btn btn-success">Alterar</button>
+                          <button id="salva" class="btn btn-success">Salvar</button>
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          [#footer#]
+      </body>
+
+      <script>
+      $('#salva').hide();
+      $('#desbloqueia').on('click', function(){
+        $('input').removeAttr('disabled')
+        $('textarea').removeAttr('disabled')
+        $('#salva').show();
+        $('#desbloqueia').hide();
+      });
+
+      $('#salva').on('click', function(){
+          errors = 0;
+
+          $('.required').each(function(index, el) {
+              errors += validateEmpty(el['id']);
+          });
+
+          if (errors == 0) {
+              $.ajax({
+                 url: '/favorito/altera/',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 type: 'POST',
+                 data: new FormData(document.getElementById('form-alt'))
+              })
+
+             .success(function(data) {
+                  data = data.split(';');
+                  if(data[0] == 'sucesso'){
+                      swal({
+                          title: "Sucesso!",
+                          text: 'Favorito alterado com sucesso!',
+                          type: "success",
+                          showConfirmButton: true
+                      },
+                      function(){
+                          window.location = '/favorito';
+                      });
+                  } else {
+                      swal({
+                          title: "Ops..!",
+                          text: "Tivemos um pequeno problema, tente novamente!",
+                          type: "error",
+                          showConfirmButton: true
+                      },
+                      function(){
+
+                      });
+                  }
+              })
+          } else {
+              swal("Ops..!", "Parece que você esqueceu de preencher algum campo!", "error");
+          }
+      });
+      </script>
+      

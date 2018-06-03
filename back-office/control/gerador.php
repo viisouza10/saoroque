@@ -288,7 +288,6 @@ class gerador extends simplePHP {
               `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
               `conta_id` int(11) DEFAULT '1',
               `usuario_id` int(11) DEFAULT '1',
-              `cliente_id` varchar(100) DEFAULT '1',
               ".$campos."
               `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
               PRIMARY KEY (`id`),

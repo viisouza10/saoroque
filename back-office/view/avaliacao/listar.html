@@ -1,0 +1,69 @@
+<!doctype html>
+      <html >
+        [#header#]
+        <body>
+          [#topo#]
+          <div class="container-fluid">
+            <div class="row">
+              [#sidemenu#]
+
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <div class="row">
+                  <div class="col-md-11"><h1 class="page-header">Avaliacao</h1></div>
+                  <div class="col-md-1"><a href="/avaliacao/inserir"><button type="button" data-tip="Cadastrar" class="btn btn-success tool btn-lg btn-block"><span class=" glyphicon glyphicon-plus" aria-hidden="true"></span></button></a></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title"> <span class="glyphicon glyphicon-search"></span> Pesquisar</h3>
+                        </div>
+                        <div class="panel-body [#filtroativo#]">
+                          <form class="form-busca" method="post" action="/avaliacao/filtrar"  >
+                  <div class="col-lg-11" ><div class="row"><div class="col-md-4" >
+                    <select name="estabelecimento_id" id="estabelecimento" class="form-control " >
+                      <option value="">estabelecimento</option>
+                      [#select_estabelecimento#]
+                    </select>
+                </div><div class="col-md-4" >
+                    <select name="cliente_id" id="cliente" class="form-control " >
+                      <option value="">cliente</option>
+                      [#select_cliente#]
+                    </select>
+                </div><div class="col-md-4" >
+
+                    <input type="text" value="[#filtro_nota#]" name="nota" id="nota" class="form-control " placeholder="nota ">
+                </div><div class="col-md-4" >
+
+                    <input type="text" value="[#filtro_comentario#]" name="like comentario" id="comentario" class="form-control required" placeholder="comentario ">
+                </div></div></div>
+                  <div class="col-lg-1">
+                      <button style="margin-bottom:10px;" type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                      [#limpar#]
+                  </div>
+                </form>
+          <hr><br>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                        [#tabela#]
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="center col-md-12">
+                        [#paginacao#]
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          [#footer#]
+      </body>
+      </html>
