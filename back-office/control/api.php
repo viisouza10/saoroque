@@ -60,24 +60,8 @@ class api extends simplePHP {
         exit;
     }
 
-    /**
-    * ATENÇÃO - Funcões destinado ao APP
-    **/
 
-    public function _actionLogin() {
-
-        $data = $_REQUEST;
-        $data["email"] = trim($_REQUEST["email"]);
-        $data["senha"] = md5(trim($_REQUEST["senha"]));
-
-        $cliente = $this->model->getData("clientes", "id, nome, cpf, email", $data);
-
-        if ($cliente[0]["result"] == "empty") {
-            $this->apiReturn("error","Não foi possivel realizar o login, verifique o usuário e a senha.");
-        } else {
-            $this->apiReturn("success","Login realizado com sucesso!", $cliente[0]);
-        }
-
+    public function _actionTeste(){
     }
 
     public function _actionCadastrarCliente(){

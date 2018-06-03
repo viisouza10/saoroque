@@ -1,34 +1,20 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-
 <ion-content padding class="register auth-bg">
   <!--register form-->
   <div class="middle-align">
     <div>
-      <h3 ion-text color="light" border-color text-center>Create an account</h3>
+      <h3 ion-text color="light" border-color text-center>Cadastre sua conta</h3>
       <ion-list class="list-no-border">
         <ion-item>
-          <ion-input type="text" placeholder="First Name"></ion-input>
+          <ion-input type="text" placeholder="Nome" [(ngModel)]="objeto.nome" id="nome" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" placeholder="Last Name"></ion-input>
+          <ion-input type="email" placeholder="Email" [(ngModel)]="objeto.email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" placeholder="Home City"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="email" placeholder="Email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="password" placeholder="Password"></ion-input>
+          <ion-input type="password" placeholder="Password" [(ngModel)]="objeto.senha"></ion-input>
         </ion-item>
         <ion-item class="has-btn" margin-top>
-          <button ion-button block color="primary" (click)="signUp()">Sign Up</button>
+          <button ion-button block color="primary" (click)="signUp(objeto)">Cadastra-se</button>
         </ion-item>
         <ion-item text-wrap>
           <span ion-text color="light">By pressing Sign Up you agree with the</span>
