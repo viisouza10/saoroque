@@ -1,0 +1,115 @@
+<html >
+        [#header#]
+        <body>
+          [#topo#]
+          <div class="container-fluid">
+            <div class="row">
+              [#sidemenu#]
+
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <div class="row">
+                  <div class="col-md-11"><h1 class="page-header">Cliente</h1></div>
+                  <div class="col-md-1"><a href="/cliente"><button type="button" data-tip="Voltar"  onclick="goBack()" class="btn tool btn-lg btn-block"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button></a></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title"> <span class="glyphicon glyphicon-plus"></span> Ver cliente</h3>
+                        </div>
+                        <div class="panel-body">
+                          <form id="form-alt" method="POST" class="form-adicionar" enctype="multipart/form-data">
+                          <input type="hidden" name="id" value="[#id#]" />
+                            <div class="row">
+                            <div class="col-md-4">
+              <label for="nome">nome*</label>
+              <input disabled type="text" value="[#nome#]" name="nome" id="nome" class="form-control required" placeholder="nome do cliente">
+          </div><div class="col-md-4">
+              <label for="estado">estado*</label>
+              <select name="estado" id="estado" class="form-control required" >
+                [#select_estado#]
+              </select>
+          </div><div class="col-md-4">
+              <label for="cidade">cidade*</label>
+              <input disabled type="text" value="[#cidade#]" name="cidade" id="cidade" class="form-control required" placeholder="cidade do cliente">
+          </div><div class="col-md-4">
+              <label for="email">email*</label>
+              <input disabled type="text" value="[#email#]" name="email" id="email" class="form-control required" placeholder="email do cliente">
+          </div><div class="col-md-4">
+              <label for="senha">senha*</label>
+              <input disabled type="password" value="[#senha#]" name="senha" id="senha" class="form-control required" placeholder="senha do cliente">
+          </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="panel-footer text-right">
+                          <button id="desbloqueia" class="btn btn-success">Alterar</button>
+                          <button id="salva" class="btn btn-success">Salvar</button>
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          [#footer#]
+      </body>
+
+      <script>
+      $('#salva').hide();
+      $('#desbloqueia').on('click', function(){
+        $('input').removeAttr('disabled')
+        $('textarea').removeAttr('disabled')
+        $('#salva').show();
+        $('#desbloqueia').hide();
+      });
+
+      $('#salva').on('click', function(){
+          errors = 0;
+
+          $('.required').each(function(index, el) {
+              errors += validateEmpty(el['id']);
+          });
+
+          if (errors == 0) {
+              $.ajax({
+                 url: '/cliente/altera/',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 type: 'POST',
+                 data: new FormData(document.getElementById('form-alt'))
+              })
+
+             .success(function(data) {
+                  data = data.split(';');
+                  if(data[0] == 'sucesso'){
+                      swal({
+                          title: "Sucesso!",
+                          text: 'Cliente alterado com sucesso!',
+                          type: "success",
+                          showConfirmButton: true
+                      },
+                      function(){
+                          window.location = '/cliente';
+                      });
+                  } else {
+                      swal({
+                          title: "Ops..!",
+                          text: "Tivemos um pequeno problema, tente novamente!",
+                          type: "error",
+                          showConfirmButton: true
+                      },
+                      function(){
+
+                      });
+                  }
+              })
+          } else {
+              swal("Ops..!", "Parece que você esqueceu de preencher algum campo!", "error");
+          }
+      });
+      </script>
+      
