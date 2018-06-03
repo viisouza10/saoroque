@@ -1,0 +1,17 @@
+#seletorPFPJ {
+	display: none;
+}
+#tab2,#tab3,#tab4 {
+	display: none;	
+}
+
+#painel-restricoes,#painel-dependentes,#painel-contratos,#painel_consumo,#painel_desconto,#painel_contatos,#painel_veiculos,#painel_precos {
+	display: none;
+}
+
+#assinatura {
+	display: none;
+}
+#aba-assinatura {
+	display: none;	
+}

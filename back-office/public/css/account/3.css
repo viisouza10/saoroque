@@ -1,0 +1,9 @@
+#tab2,#tab3,#tab4,#el_cliente_1,#el_cliente_2,#el_cliente_3,#el_cliente_4,#el_cliente_5,#el_cliente_6,#ls_clientes,#dt_cliente1,#dt_cliente2,#dt_cliente3,#dt_cliente4,#dt_cliente5,#dt_cliente6,#painel-restricoes,#painel-dependentes,#painel_consumo,#painel_desconto,#painel_contatos,#painel_veiculos,#painel_socios,#painel_precos,#email2,#email3,#email4 {
+	display: none;
+}
+
+.conjuge {
+	display: block !important;
+}
+
+

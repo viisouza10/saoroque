@@ -1,0 +1,137 @@
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuMobile" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logoMenu hidden-md hidden-lg">
+                    <a href="/admin"><img src="/images/logo.png"/></a>
+                </div>
+            </div>
+
+            <ul class="nav navbar-right top-nav hidden-xs">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      [#usernameMaster#] <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/logout"><i class="fa fa-fw fa-power-off" aria-hidden="true"></i> Sair</a>
+                            <a href="/perfil" ><i class="fa fa-user"></i> Alterar Perfil</a>
+                            <a href="#" aria-hidden="true" data-toggle="modal" data-target="#updatePass"><i class="fa fa-key"></i> Alterar Senha</a>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+                <div class="collapse navbar-collapse" id="menuDesktop">
+                    <div class="logoMenu hidden-xs">
+                        <a href="/admin"><img src="/images/logo.png"/></a>
+                    </div>
+                    <ul class="nav navbar-nav side-nav">
+                        <li class="dropdown hidden-md hidden-lg">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  [#usernameMaster#] <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Sair</a>
+                                </li>
+                            </ul>
+                        </li>
+                        [#cliente_menu#]
+                    </ul>
+                </div>
+            <div class="collapse navbar-collapse" id="menuMobile">
+                    <div class="logoMenu hidden-xs">
+
+                    </div>
+                    <ul class="nav navbar-nav ">
+                        <li class="dropdown hidden-md hidden-lg">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  [#usernameMaster#] <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Sair</a>
+                                </li>
+                            </ul>
+                        </li>
+                        [#cliente_menu#]
+                    </ul>
+                </div>
+        </nav>
+
+
+<!-- Modal -->
+<div class="modal fade t-modal" id="updatePass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Alterar senha</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <form action="#" name="update-pass">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" placeholder="Senha" id="senha" name="senha"><br>
+                    <label for="cSenha">Confirmar senha</label>
+                    <input type="password" class="form-control" placeholder="Confirmar senha" id="cSenha">
+                </form>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" id="pass-update">Alterar Senha</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#pass-update').on('click', function(e){
+        e.preventDefault();
+        if ($('#senha').val() != $('#cSenha').val()){
+         swal('Ops', "As senhas não conferem", 'error');
+        }else if($('#senha').val().length < 6){
+         swal('ops', "A sua senha deve conter mais de 6 ou mais caracteres", "error");
+        }else{
+         form = $('form[name="update-pass"]');
+         dados = form.serialize();
+             $.ajax({
+              url: '/action/updatePass',
+              type: 'POST',
+              data: dados,
+              beforeSend: function(){
+                $('#pass-update').html("Atualizando <i class=\"fa fa-spinner fa-pulse fa-fw\"></i>");
+              },
+              success: function(resp){
+                resp = JSON.parse(resp);
+                swal({
+                    title: resp.title,
+                    text: resp.message,
+                    type: resp.status
+                }, function(){
+                    if(resp.status == 'success'){
+                        $("#updatePass").modal('hide');
+                    }
+                });
+              },
+              complete: function(){
+                $('#pass-update').html('Alterar senha');
+              }
+             });
+        }
+
+        return false;
+    });
+});
+
+
+
+        </script>

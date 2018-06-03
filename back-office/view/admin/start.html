@@ -1,0 +1,109 @@
+<!doctype html>
+      <html >
+        [#header#]
+        <body>
+          [#topo#]
+          <div class="container-fluid">
+            <div class="row">
+              [#sidemenu#]
+
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <div class="row">
+                  <div class="col-md-12"><h1 class="page-header">Painel geral</h1></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6">
+                        <div class="panel ">
+                            <div class="panel-heading">
+                                <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-user fa-3x"></i>
+                                  </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">[#clientes#]</div>
+                                        <div>Clientes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/clientes">
+                                <div class="panel-footer">
+
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                  <div class="col-lg-4 col-md-6">
+                        <div class="panel ">
+                            <div class="panel-heading">
+                                <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-home fa-3x"></i>
+                                  </div>
+                                    <div class="col-xs-9 text-right">
+                                      <div class="huge">[#empreendimentos#]</div>
+                                      <div>Empreendimentos</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/empreendimentos">
+                                <div class="panel-footer">
+
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                  <div class="col-lg-4 col-md-6">
+                        <div class="panel ">
+                            <div class="panel-heading">
+                                <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-comment fa-3x"></i>
+                                  </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">[#chats#]</div>
+                                        <div>Chats</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/chats">
+                                <div class="panel-footer">
+
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12">
+                      <h3 class="page-header">
+                          <div class="text">Atalhos</div>
+                      </h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                      <a href="/clientes/inserir" class="btn btn-info btn-block block">Novo cliente</a>
+                  </div>
+                  <div class="col-lg-4">
+                      <a href="/multimidia/inserir" class="btn btn-info btn-block block">Novo conteudo</a>
+                  </div>
+                  <div class="col-lg-4">
+                      <a href="/usuario/inserir" class="btn btn-info btn-block block">Novo usuário</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          [#footer#]
+      </body>
+      </html>

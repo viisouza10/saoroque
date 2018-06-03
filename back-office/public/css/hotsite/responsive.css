@@ -1,0 +1,209 @@
+@media only screen and (min-width: 1500px) {
+     .cat-list-area {
+         width: 26.7%;
+         padding-left: 15px;
+    }
+     .sub-cat-links-area {
+         width: 18%;
+    }
+}
+ @media only screen and (min-width: 992px) and (max-width: 1050px) {
+     .cat-title {
+         font-size: 11px;
+    }
+     .cat-sub-title {
+         font-size: 8px;
+    }
+     .cat-sub-title i {
+         font-size: 12px;
+    }
+     .cat-list ul li a {
+         font-size: 8px;
+         margin-top: 1px;
+         margin-bottom: 1px;
+    }
+}
+ @media only screen and (max-width: 991px) {
+     .cat-list-area {
+         position: inherit;
+         width: 100%;
+    }
+     .main-menu ul li a {
+         font-size: 12px;
+         padding: 10px 10px;
+    }
+     .single-cat-title {
+         width: 25%;
+    }
+     .single-cat-title:last-child {
+         border-right: 1px solid #EDEDED;
+    }
+     .sub-cat-links-area {
+         width: 20%;
+    }
+     .single-product-details {
+         width: 33.33%;
+    }
+     .tab-padding-0 {
+         padding-right: 30px;
+    }
+     .phonto-area {
+         margin-bottom: 15px;
+    }
+     .single-price{
+         border:0px;
+         margin-bottom:25px;
+    }
+     .single-price h2 span {
+         margin-left: -8%;
+    }
+     .message-text {
+         width: 85%;
+    }
+     .single-receive-product{
+         margin-bottom:15px;
+    }
+     .valor, .frete{
+         margin-top: 20px;
+         text-align: left;
+    }
+     .product-search-form {
+         text-align: left;
+         margin-top:15px;
+    }
+}
+ @media only screen and (max-width: 767px) {
+     .single-right-area ul li {
+         width: 100%;
+         margin-top: 5px;
+         margin-bottom: 5px;
+    }
+     .border-left {
+         border-left: 0px solid #EAEAEA;
+    }
+     .header-top-area ul li a {
+         padding: 10px 15px;
+         border-left: 0px solid #232223;
+    }
+     .single-widget {
+         margin-bottom: 10px;
+    }
+     .cat-list-area {
+         position: inherit;
+         left: 0px;
+         top: 0px;
+         width: 100%;
+         height: 100%;
+    }
+     .navbar-collapse {
+         padding: 0px 15px;
+    }
+     .main-menu ul li a {
+         padding: 5px 10px;
+    }
+     .contact-form-area {
+         padding: 25px 25px;
+    }
+     h2.heading {
+         font-size: 30px;
+    }
+     .contact-form-area p.con-text {
+         font-size: 10px;
+    }
+     .single-cat-title {
+         width: 50%;
+         border-right: 1px solid #EDEDED;
+    }
+     .cat-links {
+         width: 100%;
+    }
+     .protection-text-details {
+         padding-left: 20px;
+         padding-right: 20px;
+         padding-top: 20px;
+    }
+     .sub-cat-links-area {
+         position: inherit;
+         width: 80%;
+    }
+     .cat-menu-list {
+         width: 100%;
+         margin-bottom: 10px;
+    }
+     .cat-menu-search {
+         min-width: auto;
+         width: 100%;
+    }
+     .single-product-details {
+         width: 100%;
+    }
+     .register-form {
+         padding: 30px 15px;
+    }
+     .mo-padding-0 {
+         padding:0px;
+    }
+     .reg-button button {
+         margin-right: 0px;
+         width: 100%;
+    }
+     .banner-highlight {
+         padding: 15px 0px;
+         margin-left:15px;
+         margin-right:15px;
+    }
+     .choose-plan {
+         padding: 25px;
+    }
+     .capca {
+         margin-bottom: 15px;
+    }
+     .longin-area {
+         padding: 20px;
+    }
+     .longin-area button.cancle{
+         width: 100%;
+    }
+     .longin-area button.submit{
+         width: 100%;
+    }
+     .choose-receive-button button.voltar-button{
+         width:100%;
+    }
+     .choose-receive-button button.receive-button{
+         max-width:100%;
+         margin-left:0px;
+    }
+     .valor, .frete {
+         width:100%;
+    }
+     .lucas-buttons button.voltar, .lucas-buttons button.continuar{
+         width:100%;
+         float:none;
+         max-width:100%;
+    }
+     .product-main-area h2 {
+         font-size: 22px;
+    }
+     .my-cart-titles{
+         display:none;
+    }
+     .cart-left-area {
+         width: 100%;
+         margin-bottom:15px;
+    }
+     .cart-amount-area {
+         width: 100%;
+    }
+     .cart-amount-area .plus-miness {
+         margin: inherit;
+    }
+     .cart-price-area, .cart-right-area{
+         text-align:left;
+         width:100%;
+         margin-top:10px;
+    }
+     .product-search-form input{
+         margin-bottom:10px;
+    }
+}

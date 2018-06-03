@@ -1,0 +1,46 @@
+<!doctype html>
+      <html >
+        [#header#]
+        <body>
+          [#topo#]
+          <div class="container-fluid">
+            <div class="row">
+              [#sidemenu#]
+
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <div class="row">
+                  <div class="col-md-11"><h1 class="page-header"></h1></div>
+                  <div class="col-md-1"><a href="//inserir"><button type="button" data-tip="Cadastrar" class="btn btn-success tool btn-lg btn-block"><span class=" glyphicon glyphicon-plus" aria-hidden="true"></span></button></a></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title"> <span class="glyphicon glyphicon-search"></span> Pesquisar</h3>
+                        </div>
+                        <div class="panel-body [#filtroativo#]">
+                          
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                        [#tabela#]
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="center col-md-12">
+                        [#paginacao#]
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          [#footer#]
+      </body>
+      </html>

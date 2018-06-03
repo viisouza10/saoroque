@@ -1,0 +1,195 @@
+[#topheader#]
+<body>
+    <div id="wrapper">
+        [#menu#]
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <section class="col-lg-12 fullpage">
+
+                        <h1 class="page-header">
+                            <a href="/usuarios/listar" class="text-link">Gerador<small> | Módulo</small></a>
+                        </h1>
+
+                        <div class="col-md-offset-10 col-md-2 col-xs-offset-7 pull-right crud-add">
+                            <div class="row">
+                                <a onclick="goBack()" type="button" class="btn btn-info btn-voltar btn-blocks"><i class="fa fa-chevron-left" aria-hidden="true"></i> VOLTAR</a>
+                            </div>
+                        </div>
+
+                        <div class="row panel-user">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div role="tabpanel">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="geral">
+                                                <ol class="breadcrumb text-center remove-margin">
+                                                    <li class="active">
+                                                     Um módulo é um conjunto de atividades de um sistema
+                                                    </li>
+                                                </ol>
+                                                <form id="mainForm" method="POST" class="form-usuario" action="/gerador/create">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="nome">Nome*</label>
+                                                                <input type="text" value="" name="modulo" id="modulo" class="form-control required" placeholder="Titulo do módulo">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="campos" class="row">
+
+
+                                                    </div>
+
+                                                        <button id="plus" type="button" name="button">+</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-offset-11">
+                                <button id="salva" class="btn btn-success">Gerar</button>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="indice" value="0">
+    [#footer#]
+<script>
+$(document).ready(function(){
+    $('.testItem').hide();
+    $('#prazo').datetimepicker({
+        format: "DD/MM/YYYY", locale:"pt-br"
+    });
+    if($('#job_id').val() != '') {
+      $('#tipo').val('manutencao')
+    }
+    Dropzone.options.myAwesomeDropzone = {
+      init: function() {
+        this.on("success", function(file) {
+          $('#mainForm').append('<input id="'+file.name+'" class="fileUpload" type="hidden" name="file[]" value="'+file.xhr.response+'" />')
+        });
+      },
+      addRemoveLinks : true,
+      dictDefaultMessage : '<i class="glyphicon glyphicon-upload"></i>  Arraste arquivos aqui ou clique para selecionar'
+    };
+})
+$('#tipo').change(function(){
+    if($('#tipo').val() == 'Testes') {
+        $('.testItem').show();
+    } else{
+        $('.testItem').hide();
+    }
+})
+
+
+$('#salva').on('click', function(){
+    errors = 0;
+
+    $('.required').each(function(index, el) {
+        errors += validateEmpty(el['id']);
+    });
+
+    if (errors == 0) {
+        $('#mainForm').submit();
+    } else {
+        swal("Ops..!", "Parece que você esqueceu de preencher algum campo!", "error");
+    }
+});
+
+$('#prosseguir').on('click', function(){
+    errors = 0;
+
+    $('.required').each(function(index, el) {
+        errors += validateEmpty(el['id']);
+    });
+
+    if (errors == 0) {
+        $.ajax({
+           url: '/action/InsereCard/',
+           type: 'POST',
+           data: $('.form-usuario').serialize()
+        })
+
+       .success(function(data) {
+            data = data.split(';');
+            if(data[0] == 'sucesso'){
+                swal({
+                    title: "Sucesso!",
+                    text: 'Card adicionado com sucesso!',
+                    type: "success",
+                    showConfirmButton: true
+                },
+                function(){
+                    $('#nome').val('')
+                    $('#descricao').val('')
+                    $('#todos').val('')
+                });
+            } else {
+                swal({
+                    title: "Ops..!",
+                    text: 'Tivemos um pequeno problema, tente novamente!',
+                    type: "error",
+                    showConfirmButton: true
+                },
+                function(){
+
+                });
+            }
+        })
+    } else {
+        swal("Ops..!", "Parece que você esqueceu de preencher algum campo!", "error");
+    }
+});
+
+$('#plus').click(function() {
+  indice = $('#indice').val();
+  indice++;
+  $('#indice').val(indice)
+  campos = '<option value="nome">TEXTO (Varchar 255)</option>';
+  campos += '<option value="senha">Senha</option>';
+  campos += '<option value="texto">Textarea</option>';
+  campos += '<option value="avatar">Avatar</option>';
+  campos += '<option value="oculto">Oculto</option>';
+  campos += '<option value="email">E-mail</option>';
+  campos += '<option value="numero">Número (Int 11)</option>';
+  campos += '<option value="data">Data</option>';
+  campos += '<option value="cpf">Cpf</option>';
+  campos += '<option value="cnpj">Cnpj</option>';
+  campos += '<option value="celular">Celular</option>';
+  campos += '<option value="telefone">Telefone (Fixo)</option>';
+  campos += '<option value="cep">Cep</option>';
+  campos += '<option value="reais">Reais</option>';
+  campos += '<option value="estado">Estado</option>';
+  campos += '<option value="cidade">Cidade</option>';
+  campos += '<option value="select">Select Fixo</option>';
+  campos += '<option value="select_tabela">Select Tabela (identificar->)</option>';
+  campos += '<option value="cartao">Número de cartão</option>';
+  campos += '<option value="validade">Validade de cartão</option>';
+  campos += '<option value="status">Status (Ativo/Inativo)</option>';
+  campo = '<div class="col-md-1"><input type="checkbox" checked name="listar['+indice+']" /><br>Listar?</div>'
+  campo += '<div class="col-md-1"><input type="checkbox" checked name="obrigatorio['+indice+']" /><br>Obrigatório?</div>'
+  campo += '<div class="col-md-1"><input type="checkbox" checked name="filtro['+indice+']" /><br>Filtro?</div>'
+  campo += '<div class="col-md-3"><select class="form-control" name="tipo['+indice+']" >'+campos+'</select></div>'
+  campo += '<div class="col-md-3"><input class="form-control" type="text" name="nome['+indice+']" placeholder="Nome do campo para usuário" /> </div>'
+  campo += '<div class="col-md-3"><input class="form-control" type="text" name="opcoes['+indice+']" placeholder="Opções adicionais do campo" /> </div>'
+  $('#campos').append(campo)
+})
+</script>
+
+</body>
+</html>
