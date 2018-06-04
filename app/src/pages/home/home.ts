@@ -9,8 +9,9 @@ import { HotelDetailPage } from "../hotel-detail/hotel-detail";
 import { RestaurantsPage } from "../restaurants/restaurants";
 import { HotelsPage } from "../hotels/hotels";
 import { AttractionsPage } from "../attractions/attractions";
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from "@ionic-native/geolocation";
 import { WeatherProvider } from "../../providers/weather/weather";
+import { EstabelecimentoProvider } from "../../providers/estabelecimento/estabelecimento";
 
 /*
  Generated class for the LoginPage page.
@@ -30,15 +31,23 @@ export class HomePage {
   // attractions
   public attractions: any;
 
-  private hoje:Date = new Date();
+  private hoje: Date = new Date();
 
-  private arrayDia:Array<String> = ['seu <strong>Domingo</strong>','<strong>sua Segunda</strong>','<strong>sua Terça</strong>','<strong>sua Quarta</strong>','<strong>sua Quinta</strong>','<strong>sua Sexta</strong>','<strong>seu Sábado</strong>'];
+  private arrayDia: Array<String> = [
+    "seu <strong>Domingo</strong>",
+    "<strong>sua Segunda</strong>",
+    "<strong>sua Terça</strong>",
+    "<strong>sua Quarta</strong>",
+    "<strong>sua Quinta</strong>",
+    "<strong>sua Sexta</strong>",
+    "<strong>seu Sábado</strong>"
+  ];
 
-  public diaSemana:String = this.arrayDia[this.hoje.getDay()];
+  public diaSemana: String = this.arrayDia[this.hoje.getDay()];
 
-  public clima:String;
+  public clima: String;
 
-  public temperatura:Number;
+  public temperatura: Number;
   constructor(
     public app: App,
     public nav: NavController,
@@ -47,25 +56,23 @@ export class HomePage {
     public restaurantService: RestaurantService,
     public attractionService: AttractionService,
     public wather: WeatherProvider,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private estabelecimento: EstabelecimentoProvider
   ) {
-    
-    
+    estabelecimento.getAll().then(res => {
+      console.log(res.data.restaurantes);
 
+      this.restaurants = res.data.restaurantes;
+      this.hotels =  res.data.hoteis;
+      this.attractions =  res.data.eventos;
+    });
 
-    wather.tempo().then(res =>{
+    wather.tempo().then(res => {
       console.log(res);
-      
+
       this.clima = res.condition_slug;
       this.temperatura = res.temp;
-      
-    })  
-  
-
-    // set sample data
-    this.restaurants = restaurantService.getAll();
-    this.hotels = hotelService.getAll();
-    this.attractions = attractionService.getAll();
+    });
   }
 
   // make array with range is n

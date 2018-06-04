@@ -46,6 +46,7 @@ import { WelcomePage } from "../pages/welcome/welcome";
 import { CadastroProvider } from "../providers/cadastro/cadastro";
 import { SimplejsProvider } from "../providers/simplejs/simplejs";
 import { WeatherProvider } from '../providers/weather/weather';
+import { EstabelecimentoProvider } from '../providers/estabelecimento/estabelecimento';
 // import { SimplejsProvider } from '../providers/simplejs/simplejs';
 // end import pages
 
@@ -113,7 +114,8 @@ import { WeatherProvider } from '../providers/weather/weather';
     CadastroProvider,
     SimplejsProvider,
     FileTransfer,
-    WeatherProvider
+    WeatherProvider,
+    EstabelecimentoProvider
     /* import services */
   ]
 })

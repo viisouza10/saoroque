@@ -39,9 +39,9 @@
     </div>
     <div class="items" padding-left padding-bottom>
       <div class="card round" *ngFor="let restaurant of restaurants" (click)="viewRestaurant(restaurant.id)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.thumb + ')'}"></div>
+        <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.imagem + ')'}"></div>
         <div class="padding-xs">
-          <h5>{{ restaurant.name }}</h5>
+          <h5>{{ restaurant.nome }}</h5>
           <div class="rating">
             <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
             <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
@@ -54,7 +54,7 @@
               <span ion-text color="restaurant-color">{{ restaurant.scores[1].name }}</span>
             </div> -->
             <div class="pull-right">
-              {{ restaurant.location.distance }} km
+              <!-- {{ restaurant.location.distance }} km -->
             </div>
             <div class="clear"></div>
           </div>
@@ -77,9 +77,9 @@
     </div>
     <div class="items" padding-left padding-bottom>
       <div class="card round" *ngFor="let hotel of hotels" (click)="viewHotel(hotel.id)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + hotel.thumb + ')'}"></div>
+        <div class="card-header" [ngStyle]="{'background-image': 'url(' + hotel.imagem + ')'}"></div>
         <div class="padding-xs">
-          <h5>{{ hotel.name }}</h5>
+          <h5>{{ hotel.nome }}</h5>
           <div class="rating">
             <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(hotel.rating)"></ion-icon> -->
             <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon> -->
@@ -92,7 +92,7 @@
               <span ion-text color="restaurant-color">{{ hotel.scores[1].name }}</span>
             </div> -->
             <div class="pull-right">
-              {{ hotel.location.distance }} km
+              <!-- {{ hotel.location.distance }} km -->
             </div>
             <div class="clear"></div>
           </div>
@@ -115,9 +115,9 @@
     </div>
     <div class="items" padding-left padding-bottom>
       <div class="card round" *ngFor="let attraction of attractions" (click)="viewAttraction(attraction.id)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + attraction.thumb + ')'}"></div>
+        <div class="card-header" [ngStyle]="{'background-image': 'url(' + attraction.imagem + ')'}"></div>
         <div class="padding-xs">
-          <h5>{{ attraction.name }}</h5>
+          <h5>{{ attraction.nome }}</h5>
           <div class="rating">
             <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(attraction.rating)"></ion-icon> -->
             <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - attraction.rating)"></ion-icon> -->
@@ -130,7 +130,7 @@
               <span ion-text color="restaurant-color">{{ attraction.scores[1].name }}</span> -->
             </div>
             <div class="pull-right">
-              {{ attraction.location.distance }} km
+              <!-- {{ attraction.location.distance }} km -->
             </div>
             <div class="clear"></div>
           </div>

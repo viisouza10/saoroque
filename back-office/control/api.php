@@ -61,7 +61,11 @@ class api extends simplePHP {
     }
 
 
-    public function _actionTeste(){
+    public function _actionBuscaEstabelecimento(){
+        $res['restaurantes'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "restaurante"));
+        $res['hoteis'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "hotel"));
+        $res['eventos'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "evento"));
+        $this->apiReturn("sucesso","",$res);
     }
 
     public function _actionCadastrarCliente(){

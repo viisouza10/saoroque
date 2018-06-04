@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import { SimplejsProvider } from "../providers/simplejs/simplejs";
+import { SimplejsProvider } from "../../providers/simplejs/simplejs";
 
 @Injectable()
-export class RestaurantService {
+export class EstabelecimentoProvider {
   private restaurants:any;
 
   constructor(public SIMPLEJS:SimplejsProvider) {
@@ -10,8 +10,8 @@ export class RestaurantService {
   }
 
   getAll() {
-    this.SIMPLEJS.getApi("")
-    return this.restaurants;
+    return this.SIMPLEJS.getApi("buscaEstabelecimento")
+    
   }
 
   getItem(id) {
