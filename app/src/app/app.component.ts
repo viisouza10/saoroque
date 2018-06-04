@@ -5,6 +5,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 // import pages
+import {HomePage} from '../pages/home/home';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {RegisterPage} from '../pages/register/register';
 import {LoginPage} from '../pages/login/login';
@@ -14,6 +15,7 @@ import {FindFriendPage} from '../pages/find-friend/find-friend';
 import {HotelsPage} from '../pages/hotels/hotels';
 import {RestaurantsPage} from '../pages/restaurants/restaurants';
 import {AttractionsPage} from '../pages/attractions/attractions';
+import {RestaurantDetailPage} from '../pages/restaurant-detail/restaurant-detail';
 // end import pages
 
 @Component({
@@ -76,8 +78,8 @@ export class MyApp {
   ];
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    // this.rootPage = WelcomePage;
-    this.rootPage = RegisterPage;
+    this.rootPage = HomePage;
+    // this.rootPage = RegisterPage;
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

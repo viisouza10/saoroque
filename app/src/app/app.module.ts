@@ -7,6 +7,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from "@angular/http";
 import { Network } from "@ionic-native/network";
+import { Geolocation } from '@ionic-native/geolocation';
 import {
   FileTransfer,
   FileUploadOptions,
@@ -44,6 +45,7 @@ import { SettingPage } from "../pages/setting/setting";
 import { WelcomePage } from "../pages/welcome/welcome";
 import { CadastroProvider } from "../providers/cadastro/cadastro";
 import { SimplejsProvider } from "../providers/simplejs/simplejs";
+import { WeatherProvider } from '../providers/weather/weather';
 // import { SimplejsProvider } from '../providers/simplejs/simplejs';
 // end import pages
 
@@ -104,12 +106,14 @@ import { SimplejsProvider } from "../providers/simplejs/simplejs";
     HotelService,
     RestaurantService,
     Network,
+    Geolocation,
     ActivityService,
     AttractionService,
     ContactService,
     CadastroProvider,
     SimplejsProvider,
-    FileTransfer
+    FileTransfer,
+    WeatherProvider
     /* import services */
   ]
 })

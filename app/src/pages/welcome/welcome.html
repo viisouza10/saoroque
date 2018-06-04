@@ -39,26 +39,27 @@
   </ion-slides>
 
   <!--buttons-->
-  <div text-center>
+  <!-- <div text-center>
     <span ion-text color="light">Cadastra-se com:</span>
-  </div>
+  </div> -->
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block color="fb-color">
+        <!-- <button ion-button block color="fb-color">
           Facebook
-        </button>
+        </button> -->
+        <button ion-button class="button-transparent" block (click)="goHome()">Avançar</button>
       </ion-col>
-      <ion-col>
+      <!-- <ion-col>
         <button ion-button block color="light">
           <span gg-color>Google</span>
         </button>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
         <button ion-button class="button-transparent" block (click)="signUp()">Cadastre-se</button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 </ion-content>

@@ -22,15 +22,15 @@
     <div class="padding-xs">
       <h5>{{ restaurant.name }}</h5>
       <div class="rating">
-        <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon>
-        <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon>
-        <span ion-text color="gray">{{ restaurant.reviews.length }} reviews</span>
+        <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
+        <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
+        <!-- <span ion-text color="gray">{{ restaurant.reviews.length }} reviews</span> -->
       </div>
-      <span ion-text color="gray">Recommended for:</span>
+      <!-- <span ion-text color="gray">Recommended for:</span> -->
       <div>
         <div class="pull-left">
-          <span ion-text color="restaurant-color">{{ restaurant.scores[0].name }},</span>
-          <span ion-text color="restaurant-color">{{ restaurant.scores[1].name }}</span>
+          <!-- <span ion-text color="restaurant-color">{{ restaurant.scores[0].name }},</span>
+          <span ion-text color="restaurant-color">{{ restaurant.scores[1].name }}</span> -->
         </div>
         <div class="pull-right">
           {{ restaurant.location.distance }} km

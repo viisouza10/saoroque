@@ -43,7 +43,7 @@ export class RegisterPage {
       loader.dismiss()
       const alert = this.alertCtrl.create({
         title: 'Atenção!',
-        subTitle: this.msgVazios,
+        subTitle: `${this.msgVazios}`,
         buttons: ['OK']
       }).present();
     }else{
