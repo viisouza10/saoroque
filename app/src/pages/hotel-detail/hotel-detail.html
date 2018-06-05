@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar class="nav-transparent no-border" color="dark">
@@ -17,24 +11,25 @@
 
 <ion-content class=" item-detail">
   <!--header info-->
-  <div class="item-header" [ngStyle]="{'background-image': 'url(' + hotel.thumb + ')'}">
+  <div class="item-header" [ngStyle]="{'background-image': 'url(' + hotel.imagem + ')'}">
     <div class="inner">
       <div class="align-bottom" padding>
-        <h2 ion-text color="white">{{ hotel.name }}</h2>
+        <h2 ion-text color="white">{{ hotel.nome }}</h2>
         <div>
-          <ion-icon name="md-star" color="white" *ngFor="let star of range(hotel.rating)"></ion-icon>
-          <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon>
-          <span ion-text color="white">{{ hotel.reviews.length }} reviews</span>
+          <!-- <ion-icon name="md-star" color="white" *ngFor="let star of range(hotel.rating)"></ion-icon> -->
+          <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon> -->
+          <!-- <span ion-text color="white">{{ hotel.reviews.length }} reviews</span> -->
         </div>
         <div>
-          <span ion-text color="white">{{ hotel.location.distance }} km</span>
+          <span ion-text color="white" *ngIf="hotel.distancia > 0">{{ hotel.distancia }} km</span>
+          <span ion-text color="white" *ngIf="hotel.distancia <= 0 && hotel.latitude">Você esta próximo</span>
         </div>
       </div>
     </div>
   </div>
 
   <!--buttons-->
-  <ion-grid class="buttons border-bottom">
+  <!-- <ion-grid class="buttons border-bottom">
     <ion-row>
       <ion-col text-center>
         <ion-icon name="ios-camera-outline" color="gray"></ion-icon>
@@ -49,10 +44,10 @@
         <span ion-text color="gray">SHARE</span>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!--rating-->
-  <div class="border-bottom" text-center padding>
+  <!-- <div class="border-bottom" text-center padding>
     <span class="bold" color="gray">Rate this place</span>
     <div class="rating-form">
       <ion-icon name="ios-star" color="hotel-color" *ngFor="let star of range(rating); let i = index"
@@ -60,10 +55,10 @@
       <ion-icon name="ios-star-outline" color="hotel-color" *ngFor="let star of range(5 - rating); let i = index"
                 (click)="rate(i + rating + 1)"></ion-icon>
     </div>
-  </div>
+  </div> -->
 
   <!--scores-->
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col text-center *ngFor="let score of hotel.scores; let i=index" [hidden]="i > 3">
         <div class="progress-container p-{{ score.score }}">
@@ -75,28 +70,28 @@
         <span>{{ score.name }}</span>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!-- Show map here -->
   <div id="map-detail"></div>
 
   <!--Info-->
   <div class="border-bottom" padding>
-    <div>{{ hotel.address }}</div>
+    <div>{{ hotel.endereco }}</div>
     <div>
-      <span class="text-sm" color="gray">Address</span>
+      <span class="text-sm" color="gray">Endereço</span>
     </div>
     <div margin-top>
-      <span>{{ hotel.phone }}</span>
+      <span>{{ hotel.telefone }}</span>
       <ion-icon class="pull-right" name="call" color="hotel-color"></ion-icon>
     </div>
     <div>
-      <span class="text-sm" color="gray">Phone</span>
+      <span class="text-sm" color="gray">Telefone</span>
     </div>
   </div>
 
   <!--Reviews-->
-  <div class="border-bottom" padding>
+  <!-- <div class="border-bottom" padding>
     <span ion-text color="gray">Reviews</span>
     <ion-grid>
       <ion-row>
@@ -115,10 +110,10 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
+  </div> -->
 
   <!--list of reviews-->
-  <ion-list margin-top class="list-full-border reviews">
+  <!-- <ion-list margin-top class="list-full-border reviews">
     <div *ngFor="let review of hotel.reviews">
       <ion-item text-wrap>
         <ion-avatar item-left>
@@ -146,6 +141,6 @@
         </div>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-list> -->
 
 </ion-content>

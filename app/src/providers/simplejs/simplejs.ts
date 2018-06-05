@@ -50,11 +50,10 @@ export class SimplejsProvider {
 
   postApi(path:String, obj) {
     let filtro = new URLSearchParams();
+    
     filtro.append('objeto', JSON.stringify(obj));
-    if (this.user != null) {
-      filtro.append('registrationId', localStorage.getItem('lazerecultura.registrationId'));
-      filtro.append('id', this.user.id);
-    }
+    console.log(filtro);
+    
     return this.http
       .post(`${this.urlAPI}/${path}/`, filtro)
       .timeout(10000)

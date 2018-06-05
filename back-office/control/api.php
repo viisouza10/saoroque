@@ -62,9 +62,33 @@ class api extends simplePHP {
 
 
     public function _actionBuscaEstabelecimento(){
-        $res['restaurantes'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "restaurante"));
-        $res['hoteis'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "hotel"));
-        $res['eventos'] = $this->model->getData('estabelecimento','a.*',array("tipo" => "evento"));
+        $coords = json_decode($_REQUEST['objeto'],true);
+        $limit['start'] = 0;
+        $limit['limit'] = 10;
+        if($coords){
+            $sqlDistancia = ",round( (6371 * acos(
+                cos( radians(".$coords['latitude'].") )
+                * cos( radians( a.latitude ) )
+                * cos( radians( a.longitude ) - radians(".$coords['longitude'].") )
+                + sin( radians(".$coords['latitude'].") )
+                * sin( radians( a.latitude ) ) 
+                ) )
+                ) AS distancia  ";
+            $sqlOrder= "distancia desc,rand()";
+        }else{
+            $sqlDistancia = "";
+            $sqlOrder= "rand()";
+        }
+
+        $restaurantes = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "restaurante"),$limit,$sqlOrder);
+        if($restaurantes[0]['result'] != "empty") $res['restaurantes'] = $restaurantes;
+
+        $hoteis = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "hotel"),$limit,$sqlOrder);
+        if($hoteis[0]['result'] != "empty") $res['hoteis'] = $hoteis;
+
+        $eventos = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "evento"),$limit,$sqlOrder);
+        if($eventos[0]['result'] != "empty") $res['eventos'] = $eventos;
+        
         $this->apiReturn("sucesso","",$res);
     }
 

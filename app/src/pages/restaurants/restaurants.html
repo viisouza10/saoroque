@@ -10,17 +10,17 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Restaurants</ion-title>
+    <ion-title>Restaurantes</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="restaurants attractions common-bg">
-  <div class="card round" margin-bottom *ngFor="let restaurant of restaurants" (click)="viewRestaurant(restaurant.id)">
-    <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.thumb + ')'}"></div>
+  <div class="card round" margin-bottom *ngFor="let restaurant of restaurants" (click)="verRestaurante(restaurant)">
+    <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.imagem + ')'}"></div>
     <div class="padding-xs">
-      <h5>{{ restaurant.name }}</h5>
+      <h5>{{ restaurant.nome }}</h5>
       <div class="rating">
         <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
         <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
@@ -33,7 +33,8 @@
           <span ion-text color="restaurant-color">{{ restaurant.scores[1].name }}</span> -->
         </div>
         <div class="pull-right">
-          {{ restaurant.location.distance }} km
+          <span *ngIf="restaurant.distancia > 0">{{ restaurant.distancia }} km</span>
+          <span *ngIf="restaurant.distancia <= 0 && restaurant.latitude">Você esta próximo</span>
         </div>
         <div class="clear"></div>
       </div>

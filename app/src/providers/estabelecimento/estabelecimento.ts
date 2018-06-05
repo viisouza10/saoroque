@@ -9,9 +9,8 @@ export class EstabelecimentoProvider {
     
   }
 
-  getAll() {
-    return this.SIMPLEJS.getApi("buscaEstabelecimento")
-    
+  getAll(obj) {
+    return this.SIMPLEJS.postApi("buscaEstabelecimento",obj)
   }
 
   getItem(id) {

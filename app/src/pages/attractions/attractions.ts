@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, NavParams} from "ionic-angular";
 import {AttractionService} from "../../services/attraction-service";
 import {AttractionDetailPage} from "../attraction-detail/attraction-detail";
 
@@ -17,13 +17,12 @@ export class AttractionsPage {
   // list of attractions
   public attractions;
 
-  constructor(public nav: NavController, public attractionService: AttractionService) {
-    this.attractions = attractionService.getAll();
+  constructor(public nav: NavController, public attractionService: AttractionService,public navParams: NavParams) {
+    this.attractions = navParams.get("eventos");
   }
 
-  // view attraction detail
-  viewAttraction(id) {
-    this.nav.push(AttractionDetailPage, {id: id})
+  verEvento(evento) {
+    this.nav.push(AttractionDetailPage, {evento: evento})
   }
 
   // make array with range is n

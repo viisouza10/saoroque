@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular";
+import {NavController, Platform, NavParams} from "ionic-angular";
 import {HotelService} from "../../services/hotel-service";
 
 
@@ -24,14 +24,14 @@ export class HotelDetailPage {
   // rating values
   public ratingValues = [0, 0, 0, 0, 0];
 
-  constructor(public nav: NavController, public hotelService: HotelService, public platform: Platform) {
-    // set sample data
-    this.hotel = hotelService.getItem(1);
+  constructor(public nav: NavController, public hotelService: HotelService, public platform: Platform,public navParams:NavParams) {
+    this.hotel = navParams.get("hotel");
+    
 
-    // process reviews data
-    for (let key in this.hotel.reviews) {
-      this.ratingValues[this.hotel.reviews[key].rating - 1]++;
-    }
+    // // process reviews data
+    // for (let key in this.hotel.reviews) {
+    //   this.ratingValues[this.hotel.reviews[key].rating - 1]++;
+    // }
   }
 
   ionViewDidLoad() {
@@ -50,7 +50,7 @@ export class HotelDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.hotel.location.lat, this.hotel.location.lon);
+    let latLng = new google.maps.LatLng(this.hotel.latitude, this.hotel.longitude);
 
     let mapOptions = {
       center: latLng,

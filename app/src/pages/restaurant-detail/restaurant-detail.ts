@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular";
+import {NavController, Platform, NavParams} from "ionic-angular";
 import {RestaurantService} from "../../services/restaurant-service";
 
 declare var google: any;
@@ -24,9 +24,9 @@ export class RestaurantDetailPage {
   // rating values
   public ratingValues = [0, 0, 0, 0, 0];
 
-  constructor(public nav: NavController, public restaurantService: RestaurantService, public platform: Platform) {
+  constructor(public nav: NavController, public restaurantService: RestaurantService, public platform: Platform, public navParams: NavParams) {
     // set sample data
-    this.restaurant = restaurantService.getItem(1);
+    this.restaurant = navParams.get("restaurante");
 
     // process reviews data
     for (let key in this.restaurant.reviews) {
@@ -50,7 +50,7 @@ export class RestaurantDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.restaurant.location.lat, this.restaurant.location.lon);
+    let latLng = new google.maps.LatLng(this.restaurant.latitude, this.restaurant.longitude);
 
     let mapOptions = {
       center: latLng,

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular";
+import {NavController, Platform, NavParams} from "ionic-angular";
 import {AttractionService} from "../../services/attraction-service";
 
 
@@ -24,14 +24,14 @@ export class AttractionDetailPage {
   // rating values
   public ratingValues = [0, 0, 0, 0, 0];
 
-  constructor(public nav: NavController, public attractionService: AttractionService, public platform: Platform) {
-    // set sample data
-    this.attraction = attractionService.getItem(1);
-
-    // process reviews data
-    for (let key in this.attraction.reviews) {
-      this.ratingValues[this.attraction.reviews[key].rating - 1]++;
-    }
+  constructor(public nav: NavController, public attractionService: AttractionService, public platform: Platform,public navParams: NavParams) {
+    // // set sample data
+    // this.attraction = attractionService.getItem(1);
+    this.attraction = navParams.get("evento");
+    // // process reviews data
+    // for (let key in this.attraction.reviews) {
+    //   this.ratingValues[this.attraction.reviews[key].rating - 1]++;
+    // }
   }
 
 
@@ -51,7 +51,7 @@ export class AttractionDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.attraction.location.lat, this.attraction.location.lon);
+    let latLng = new google.maps.LatLng(this.attraction.latitude, this.attraction.longitude);
 
     let mapOptions = {
       center: latLng,

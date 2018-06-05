@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { App, NavController } from "ionic-angular";
+import { App, NavController, LoadingController } from "ionic-angular";
 import { GatewayService } from "../../services/gateway-service";
 import { HotelService } from "../../services/hotel-service";
 import { RestaurantService } from "../../services/restaurant-service";
 import { AttractionService } from "../../services/attraction-service";
 import { RestaurantDetailPage } from "../restaurant-detail/restaurant-detail";
+import { AttractionDetailPage } from "../attraction-detail/attraction-detail";
 import { HotelDetailPage } from "../hotel-detail/hotel-detail";
 import { RestaurantsPage } from "../restaurants/restaurants";
 import { HotelsPage } from "../hotels/hotels";
@@ -57,22 +58,39 @@ export class HomePage {
     public attractionService: AttractionService,
     public wather: WeatherProvider,
     private geolocation: Geolocation,
-    private estabelecimento: EstabelecimentoProvider
+    private estabelecimento: EstabelecimentoProvider,
+    public loading:LoadingController
   ) {
-    estabelecimento.getAll().then(res => {
-      console.log(res.data.restaurantes);
-
-      this.restaurants = res.data.restaurantes;
-      this.hotels =  res.data.hoteis;
-      this.attractions =  res.data.eventos;
+    const loader = this.loading.create({
+      content: "Buscando estabelecimentos, aguarde...",
     });
-
-    wather.tempo().then(res => {
-      console.log(res);
-
-      this.clima = res.condition_slug;
-      this.temperatura = res.temp;
-    });
+    loader.present();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // estabelecimento.getAll({}).then(res => {      
+      estabelecimento.getAll({"latitude": resp.coords.latitude,"longitude":resp.coords.longitude}).then(res => {      
+        this.restaurants = res.data.restaurantes;
+        this.hotels =  res.data.hoteis;
+        this.attractions =  res.data.eventos;
+        wather.tempo().then(res => {
+          this.clima = res.condition_slug;
+          this.temperatura = res.temp;
+          loader.dismiss();
+        });
+      });
+     }).catch((error) => {
+       console.log('Error getting location', error);
+       estabelecimento.getAll({}).then(res => {      
+        this.restaurants = res.data.restaurantes;
+        this.hotels =  res.data.hoteis;
+        this.attractions =  res.data.eventos;
+        wather.tempo().then(res => {
+          this.clima = res.condition_slug;
+          this.temperatura = res.temp;
+          loader.dismiss();
+        });
+      });
+     });
+     
   }
 
   // make array with range is n
@@ -80,33 +98,28 @@ export class HomePage {
     return new Array(Math.round(n));
   }
 
-  // view restaurant detail
-  viewRestaurant(id) {
-    this.app.getRootNav().push(RestaurantDetailPage, { id: id });
+  todosRestaurantes(){
+    this.nav.push(RestaurantsPage,{restaurantes:this.restaurants})
   }
 
-  // view hotel detail
-  viewHotel(id) {
-    this.app.getRootNav().push(HotelDetailPage, { id: id });
+  todosHoteis(){
+    this.nav.push(HotelsPage,{hoteis:this.hotels})
   }
 
-  // view attraction detail
-  viewAttraction(id) {
-    this.app.getRootNav().push(AttractionsPage, { id: id });
+  todosEventos(){
+    this.nav.push(AttractionsPage,{eventos:this.attractions})
   }
 
-  // view all restaurants
-  viewAllRestaurants() {
-    this.app.getRootNav().push(RestaurantsPage);
+  verRestaurante(restaurante) {
+    this.nav.push(RestaurantDetailPage, {restaurante: restaurante})
   }
 
-  // view all hotels
-  viewAllHotels() {
-    this.app.getRootNav().push(HotelsPage);
+  verHotel(hotel) {
+    this.nav.push(HotelDetailPage, {hotel: hotel})
   }
 
-  // view all restaurants
-  viewAllAttractions() {
-    this.app.getRootNav().push(AttractionsPage);
+  verEvento(evento) {
+    this.nav.push(AttractionDetailPage, {evento: evento})
   }
+  
 }

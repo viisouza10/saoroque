@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="hotel-color">
@@ -17,23 +11,25 @@
 
 
 <ion-content padding class="hotels attractions common-bg">
-  <div class="card round" margin-bottom *ngFor="let hotel of hotels" (click)="viewHotel(hotel.id)">
-    <div class="card-header" [ngStyle]="{'background-image': 'url(' + hotel.thumb + ')'}"></div>
+  <div class="card round" margin-bottom *ngFor="let hotel of hotels" (click)="verHotel(hotel)">
+    <div class="card-header" [ngStyle]="{'background-image': 'url(' + hotel.imagem + ')'}"></div>
     <div class="padding-xs">
-      <h5>{{ hotel.name }}</h5>
+      <h5>{{ hotel.nome }}</h5>
       <div class="rating">
-        <ion-icon name="md-star" color="hotel-color" *ngFor="let star of range(hotel.rating)"></ion-icon>
+        <!-- <ion-icon name="md-star" color="hotel-color" *ngFor="let star of range(hotel.rating)"></ion-icon>
         <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon>
-        <span ion-text color="gray">{{ hotel.reviews.length }} reviews</span>
+        <span ion-text color="gray">{{ hotel.reviews.length }} reviews</span> -->
       </div>
-      <span ion-text color="gray">Recommended for:</span>
+      <!-- <span ion-text color="gray">Recommended for:</span> -->
       <div>
         <div class="pull-left">
-          <span ion-text color="hotel-color">{{ hotel.scores[0].name }},</span>
-          <span ion-text color="hotel-color">{{ hotel.scores[1].name }}</span>
+          <!-- <span ion-text color="hotel-color">{{ hotel.scores[0].name }},</span>
+          <span ion-text color="hotel-color">{{ hotel.scores[1].name }}</span> -->
         </div>
         <div class="pull-right">
-          {{ hotel.location.distance }} km
+          <!-- {{ hotel.location.distance }} km -->
+          <span *ngIf="hotel.distancia > 0">{{ hotel.distancia }} km</span>
+          <span *ngIf="hotel.distancia <= 0 && hotel.latitude">Você esta próximo</span>
         </div>
         <div class="clear"></div>
       </div>

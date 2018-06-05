@@ -17,24 +17,25 @@
 
 <ion-content class=" item-detail">
   <!--header info-->
-  <div class="item-header" [ngStyle]="{'background-image': 'url(' + attraction.thumb + ')'}">
+  <div class="item-header" [ngStyle]="{'background-image': 'url(' + attraction.imagem + ')'}">
     <div class="inner">
       <div class="align-bottom" padding>
-        <h2 ion-text color="white">{{ attraction.name }}</h2>
+        <h2 ion-text color="white">{{ attraction.nome }}</h2>
         <div>
-          <ion-icon name="md-star" color="white" *ngFor="let star of range(attraction.rating)"></ion-icon>
-          <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - attraction.rating)"></ion-icon>
-          <span ion-text color="white">{{ attraction.reviews.length }} reviews</span>
+          <!-- <ion-icon name="md-star" color="white" *ngFor="let star of range(attraction.rating)"></ion-icon> -->
+          <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - attraction.rating)"></ion-icon> -->
+          <!-- <span ion-text color="white">{{ attraction.reviews.length }} reviews</span> -->
         </div>
         <div>
-          <span ion-text color="white">{{ attraction.location.distance }} km</span>
+          <span ion-text color="white" *ngIf="attraction.distancia > 0">{{ attraction.distancia }} km</span>
+          <span ion-text color="white" *ngIf="attraction.distancia <= 0">Você esta próximo</span>
         </div>
       </div>
     </div>
   </div>
 
   <!--buttons-->
-  <ion-grid class="buttons border-bottom">
+  <!-- <ion-grid class="buttons border-bottom">
     <ion-row>
       <ion-col text-center>
         <ion-icon name="ios-camera-outline" color="gray"></ion-icon>
@@ -49,54 +50,53 @@
         <span ion-text color="gray">SHARE</span>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!--rating-->
-  <div class="border-bottom" text-center padding>
+  <!-- <div class="border-bottom" text-center padding>
     <span class="bold" color="gray">Rate this place</span>
     <div class="rating-form">
-      <ion-icon name="ios-star" color="attraction-color" *ngFor="let star of range(rating); let i = index"
-                (click)="rate(i + 1)"></ion-icon>
-      <ion-icon name="ios-star-outline" color="attraction-color" *ngFor="let star of range(5 - rating); let i = index"
-                (click)="rate(i + rating + 1)"></ion-icon>
+      <ion-icon name="ios-star" color="attraction-color" *ngFor="let star of range(rating); let i = index" (click)="rate(i + 1)"></ion-icon>
+      <ion-icon name="ios-star-outline" color="attraction-color" *ngFor="let star of range(5 - rating); let i = index" (click)="rate(i + rating + 1)"></ion-icon>
     </div>
-  </div>
+  </div> -->
 
   <!--scores-->
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col text-center *ngFor="let score of attraction.scores; let i=index" [hidden]="i > 3">
         <div class="progress-container p-{{ score.score }}">
           <div class="info">
-            <span class="text-1x5">{{ score.score }}</span><span class="text-sm">%</span>
+            <span class="text-1x5">{{ score.score }}</span>
+            <span class="text-sm">%</span>
           </div>
         </div>
 
         <span>{{ score.name }}</span>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!-- Show map here -->
   <div id="map-detail"></div>
 
   <!--Info-->
   <div class="border-bottom" padding>
-    <div>{{ attraction.address }}</div>
+    <div>{{ attraction.endereco }}</div>
     <div>
       <span class="text-sm" color="gray">Address</span>
     </div>
     <div margin-top>
-      <span>{{ attraction.phone }}</span>
+      <span>{{ attraction.telefone }}</span>
       <ion-icon class="pull-right" name="call" color="attraction-color"></ion-icon>
     </div>
     <div>
-      <span class="text-sm" color="gray">Phone</span>
+      <span class="text-sm" color="gray">Telefone</span>
     </div>
   </div>
 
   <!--Reviews-->
-  <div class="border-bottom" padding>
+  <!-- <div class="border-bottom" padding>
     <span ion-text color="gray">Reviews</span>
     <ion-grid>
       <ion-row>
@@ -109,16 +109,15 @@
           <div *ngFor="let value of ratingValues; let i = index">
             {{ i + 1 }}
             <ion-icon name="star" color="gray"></ion-icon>
-            <span class="progress-bar attraction-bg" [ngStyle]="{'width': value + 'rem'}"
-                  color="attraction-color"></span>
+            <span class="progress-bar attraction-bg" [ngStyle]="{'width': value + 'rem'}" color="attraction-color"></span>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
+  </div> -->
 
   <!--list of reviews-->
-  <ion-list margin-top class="list-full-border reviews">
+  <!-- <ion-list margin-top class="list-full-border reviews">
     <div *ngFor="let review of attraction.reviews">
       <ion-item text-wrap>
         <ion-avatar item-left>
@@ -146,6 +145,6 @@
         </div>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-list> -->
 
 </ion-content>

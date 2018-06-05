@@ -11,17 +11,18 @@
 
 <ion-content class=" item-detail">
   <!--header info-->
-  <div class="item-header" [ngStyle]="{'background-image': 'url(' + restaurant.thumb + ')'}">
+  <div class="item-header" [ngStyle]="{'background-image': 'url(' + restaurant.imagem + ')'}">
     <div class="inner">
       <div class="align-bottom" padding>
-        <h2 ion-text color="white">{{ restaurant.name }}</h2>
+        <h2 ion-text color="white">{{ restaurant.nome }}</h2>
         <div>
-          <ion-icon name="md-star" color="white" *ngFor="let star of range(restaurant.rating)"></ion-icon>
-          <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon>
-          <span ion-text color="white">{{ restaurant.reviews.length }} reviews</span>
+          <!-- <ion-icon name="md-star" color="white" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
+          <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
+          <!-- <span ion-text color="white">{{ restaurant.reviews.length }} reviews</span> -->
         </div>
         <div>
-          <span ion-text color="white">{{ restaurant.location.distance }} km</span>
+          <span ion-text color="white" *ngIf="restaurant.distancia > 0">{{ restaurant.distancia }} km</span>
+          <span ion-text color="white" *ngIf="restaurant.distancia <= 0 && restaurant.latitude">Você esta próximo</span>
         </div>
       </div>
     </div>
@@ -76,12 +77,12 @@
 
   <!--Info-->
   <div class="border-bottom" padding>
-    <div>{{ restaurant.address }}</div>
+    <div>{{ restaurant.endereco }}</div>
     <div>
       <span class="text-sm" color="gray">Endereço</span>
     </div>
     <div margin-top>
-      <span>{{ restaurant.phone }}</span>
+      <span>{{ restaurant.telefone }}</span>
       <ion-icon class="pull-right" name="call" color="restaurant-color"></ion-icon>
     </div>
     <div>

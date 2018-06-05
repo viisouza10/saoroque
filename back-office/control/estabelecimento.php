@@ -125,7 +125,11 @@
           return $this->keys;
         }
         public function _actionInserir() {
-          $tipo = array(''=>'');
+          $tipo = array(
+            'Evento' => 'Evento',
+            'Hotel' => 'Hotel',
+            'Restaurante' => 'Restaurante'
+          );
             $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],1,'Selecione');#imagem
                 $this->keys['imagem'] = 'http://via.placeholder.com/500x375/';
               
@@ -134,7 +138,7 @@
         public function _actionGrava() {
           foreach ($_FILES as $key => $file) {
             if($file['tmp_name'] != '') {
-              $_POST[$key] = $this->file->uploadFile($file,'uploads/');
+              $_POST[$key] = $_SERVER['HTTP_ORIGIN'].'/uploads/'.$this->file->uploadFile($file,'uploads/');
             }
           }
 
