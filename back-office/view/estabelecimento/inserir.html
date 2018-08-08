@@ -40,28 +40,57 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="endereco">endereco*</label>
-                                            <input type="text" value="" name="endereco" id="endereco" class="form-control required" placeholder="endereco do estabelecimento" autocomplete="off">
+                                            <input type="text" value="" name="endereco" id="endereco" class="form-control required" placeholder="endereco do estabelecimento"
+                                                autocomplete="off">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="telefone">telefone*</label>
+                                            <label for="telefone">telefone1*</label>
                                             <input type="text" value="" name="telefone" id="telefone" class="form-control required" placeholder="telefone do estabelecimento">
                                         </div>
-                                        <script>$('#telefone').mask('(00) 0000-0000');</script>
-                                        <div class="col-md-4">
-                                            <label for="celular">celular*</label>
-                                            <input type="text" value="" name="celular" id="celular" class="form-control required" placeholder="celular do estabelecimento">
+                                        <script>
+                                            var telMaskBehavior = function (val) {
+                                                return val.replace(/\D/g, '').length === 11 ? '(00)00000-0000' : '(00)0000-00009'
+                                            },
+                                                spOptions = {
+                                                    onKeyPress: function (val, e, field, options) {
+                                                        field.mask(telMaskBehavior.apply({}, arguments), options)
+                                                    }
+                                                }
+                                            $('#telefone').mask(telMaskBehavior, spOptions)
+                                        </script>
+                                        <div class="col-md-3">
+                                            <label for="telefone2">telefone2</label>
+                                            <input type="text" value="" name="telefone2" id="telefone2" class="form-control" placeholder="telefone2 do estabelecimento">
                                         </div>
-                                        <script>$('#celular').mask('(00)00000-0000');</script>
-                                        <div class="col-md-4">
+                                        <script>
+                                            var telMaskBehavior = function (val) {
+                                                return val.replace(/\D/g, '').length === 11 ? '(00)00000-0000' : '(00)0000-00009'
+                                            },
+                                                spOptions = {
+                                                    onKeyPress: function (val, e, field, options) {
+                                                        field.mask(telMaskBehavior.apply({}, arguments), options)
+                                                    }
+                                                }
+                                            $('#telefone2').mask(telMaskBehavior, spOptions)
+                                        </script>
+                                        <div class="col-md-3">
                                             <label for="tipo">tipo*</label>
                                             <select name="tipo" id="tipo" class="form-control required">
                                                 [#select_tipo#]
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
+                                            <label for="status">status*</label>
+                                            <select name="status" id="status" class="form-control required">
+                                                [#select_status#]
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
                                             <label for="recomendacoes">recomendações (separo por vírgula)</label>
                                             <input type="text" value="" name="recomendacoes" id="recomendacoes" class="form-control" placeholder="recomendacoes do estabelecimento">
                                         </div>
+                                        <div class="clearfix"></div>
+                                        <br><br>
                                         <div class="col-lg-12 center">
                                             <img width="200" src="[#imagem#]" id="imgimagem" />
                                             <br>

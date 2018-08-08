@@ -6,8 +6,6 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 
 // import pages
 import {HomePage} from '../pages/home/home';
-import {WelcomePage} from '../pages/welcome/welcome';
-import {RegisterPage} from '../pages/register/register';
 import {LoginPage} from '../pages/login/login';
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {SettingPage} from '../pages/setting/setting';
@@ -15,7 +13,6 @@ import {FindFriendPage} from '../pages/find-friend/find-friend';
 import {HotelsPage} from '../pages/hotels/hotels';
 import {RestaurantsPage} from '../pages/restaurants/restaurants';
 import {AttractionsPage} from '../pages/attractions/attractions';
-import {RestaurantDetailPage} from '../pages/restaurant-detail/restaurant-detail';
 // end import pages
 
 @Component({

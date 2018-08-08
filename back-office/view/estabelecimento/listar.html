@@ -1,72 +1,109 @@
 <!doctype html>
-      <html >
-        [#header#]
-        <body>
-          [#topo#]
-          <div class="container-fluid">
-            <div class="row">
-              [#sidemenu#]
+<html>
+[#header#]
 
-              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<body>
+  [#topo#]
+  <div class="container-fluid">
+    <div class="row">
+      [#sidemenu#]
 
-                <div class="row">
-                  <div class="col-md-11"><h1 class="page-header">Estabelecimento</h1></div>
-                  <div class="col-md-1"><a href="/estabelecimento/inserir"><button type="button" data-tip="Cadastrar" class="btn btn-success tool btn-lg btn-block"><span class=" glyphicon glyphicon-plus" aria-hidden="true"></span></button></a></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h3 class="panel-title"> <span class="glyphicon glyphicon-search"></span> Pesquisar</h3>
-                        </div>
-                        <div class="panel-body [#filtroativo#]">
-                          <form class="form-busca" method="post" action="/estabelecimento/filtrar"  >
-                  <div class="col-lg-11" ><div class="row"><div class="col-md-4" >
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-                    <input type="text" value="[#filtro_nome#]" name="like nome" id="nome" class="form-control required" placeholder="nome ">
-                </div><div class="col-md-4" >
+        <div class="row">
+          <div class="col-md-11">
+            <h1 class="page-header">Estabelecimento</h1>
+          </div>
+          <div class="col-md-1">
+            <a href="/estabelecimento/inserir">
+              <button type="button" data-tip="Cadastrar" class="btn btn-success tool btn-lg btn-block">
+                <span class=" glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <span class="glyphicon glyphicon-search"></span> Pesquisar</h3>
+              </div>
+              <div class="panel-body [#filtroativo#]">
+                <form class="form-busca" method="post" action="/estabelecimento/filtrar">
+                  <div class="col-lg-11">
+                    <div class="row">
+                      <div class="col-md-4">
 
-                    <input type="text" value="[#filtro_endereco#]" name="like endereco" id="endereco" class="form-control required" placeholder="endereco ">
-                </div><div class="col-md-4" >
+                        <input type="text" value="[#filtro_nome#]" name="like nome" id="nome" class="form-control required" placeholder="nome ">
+                      </div>
+                      <div class="col-md-4">
 
-                    <input type="text" value="[#filtro_telefone#]" name="telefone" id="telefone" class="form-control required" placeholder="telefone ">
-                </div><div class="col-md-4" >
-                    <input type="text" value="[#filtro_celular#]" name="celular" id="celular" class="form-control " placeholder="celular ">
-                </div><script>$('#celular').mask('00 00000-0000');</script><div class="col-md-4" >
-                    <select name="tipo" id="tipo"  class=" form-control " >
-                    <option value="">tipo</option>
-                    [#select_tipo#]
-                    </select>
-                </div><div class="col-md-4" >
+                        <input type="text" value="[#filtro_endereco#]" name="like endereco" id="endereco" class="form-control required" placeholder="endereco ">
+                      </div>
+                      <div class="col-md-4">
 
-                    <input type="text" value="[#filtro_recomendacoes#]" name="like recomendacoes" id="recomendacoes" class="form-control required" placeholder="recomendacoes ">
-                </div></div></div>
+                        <input type="text" value="[#filtro_telefone#]" name="telefone" id="telefone" class="form-control telefone" placeholder="telefone ">
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" value="[#filtro_segundotelefone#]" name="telefone2" id="telefone2"
+                        class="form-control telefone" placeholder="telefone2 ">
+                      </div>
+                      <script>
+                        var telMaskBehavior = function (val) {
+                          console.log(val.replace(/\D/g, '').length);
+                          if(val.replace(/\D/g, '').length == 0 ) return '0'
+                          return val.replace(/\D/g, '').length === 11 ? '(00)00000-0000' : '(00)0000-00009'
+                        },
+                          spOptions = {
+                            onKeyPress: function (val, e, field, options) {
+                              field.mask(telMaskBehavior.apply({}, arguments), options)
+                            }
+                          }
+                        $('.telefone').mask(telMaskBehavior, spOptions)
+                      </script>
+                      <div class="col-md-4">
+                        <select name="tipo" id="tipo" class=" form-control" value="[#filtro_tipo#]">
+                          <option value="">tipo</option>
+                          [#select_tipo#]
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+
+                        <input type="text" value="[#filtro_recomendacoes#]" name="like recomendacoes" id="recomendacoes" class="form-control required"
+                          placeholder="recomendacoes ">
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-lg-1">
-                      <button style="margin-bottom:10px;" type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                      [#limpar#]
+                    <button style="margin-bottom:10px;" type="submit" class="btn btn-success">
+                      <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                    [#limpar#]
                   </div>
                 </form>
-          <hr><br>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="table-responsive">
-                        [#tabela#]
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="center col-md-12">
-                        [#paginacao#]
-                    </div>
-                </div>
-
+                <hr>
+                <br>
               </div>
             </div>
           </div>
-          [#footer#]
-      </body>
-      </html>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              [#tabela#]
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="center col-md-12">
+            [#paginacao#]
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  [#footer#]
+</body>
+
+</html>

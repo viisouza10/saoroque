@@ -9,9 +9,7 @@ import { HttpModule } from "@angular/http";
 import { Network } from "@ionic-native/network";
 import { Geolocation } from '@ionic-native/geolocation';
 import {
-  FileTransfer,
-  FileUploadOptions,
-  FileTransferObject
+  FileTransfer
 } from "@ionic-native/file-transfer";
 
 // import services
@@ -36,6 +34,8 @@ import { HotelsPage } from "../pages/hotels/hotels";
 import { LoginPage } from "../pages/login/login";
 import { MainTabsPage } from "../pages/main-tabs/main-tabs";
 import { ModalFilterPage } from "../pages/modal-filter/modal-filter";
+import { MovieDetailPage } from "../pages/movie-detail/movie-detail";
+import { MoviePage } from "../pages/movie/movie";
 import { MyProfilePage } from "../pages/my-profile/my-profile";
 import { RegisterPage } from "../pages/register/register";
 import { RestaurantDetailPage } from "../pages/restaurant-detail/restaurant-detail";
@@ -63,6 +63,8 @@ import { EstabelecimentoProvider } from '../providers/estabelecimento/estabeleci
     LoginPage,
     MainTabsPage,
     ModalFilterPage,
+    MovieDetailPage,
+    MoviePage,
     MyProfilePage,
     RegisterPage,
     RestaurantDetailPage,
@@ -76,7 +78,7 @@ import { EstabelecimentoProvider } from '../providers/estabelecimento/estabeleci
     HttpClientModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText: 'Voltar',
+      backButtonText: '',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
@@ -96,6 +98,8 @@ import { EstabelecimentoProvider } from '../providers/estabelecimento/estabeleci
     LoginPage,
     MainTabsPage,
     ModalFilterPage,
+    MovieDetailPage,
+    MoviePage,
     MyProfilePage,
     RegisterPage,
     RestaurantDetailPage,

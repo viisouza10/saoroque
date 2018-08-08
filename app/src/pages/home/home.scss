@@ -1,6 +1,5 @@
 page-home,
 .home {
-
   .scroll-content {
     padding-bottom: 5rem;
   }
@@ -27,11 +26,15 @@ page-home,
     ion-input {
       padding-left: 5rem;
     }
+    #card-header {
+      background-position: center;
+      background-size: cover;
+    }
   }
 
   .header {
     height: 30%;
-    background: url('../assets/img/home_header.jpg');
+    background: url("../assets/img/home_header.jpg");
     background-size: 100% auto;
   }
 
@@ -53,6 +56,7 @@ page-home,
       width: 25rem;
       display: inline-block;
       margin-right: 1.6rem;
+      color:#fff;
 
       .card-header {
         width: 100%;
@@ -77,9 +81,7 @@ page-home,
 
 .md {
   .home {
-
     .float-search {
-
       button {
         top: 1.6rem;
       }

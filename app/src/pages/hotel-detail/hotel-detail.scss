@@ -3,4 +3,8 @@ page-hotel-detail,
   // import extends css
   $color-bar: color($colors, hotel-color);
   @import "../../theme/circle_progress";
+  .item-header{
+    background-position: center;
+    background-size: cover;
+  }
 }

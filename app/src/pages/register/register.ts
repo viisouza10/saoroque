@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
-import {NavController, Item, AlertController} from "ionic-angular";
+import {NavController, AlertController} from "ionic-angular";
 import {LoginPage} from "../login/login";
-import {MainTabsPage} from "../main-tabs/main-tabs";
 import { SimplejsProvider } from "../../providers/simplejs/simplejs";
 import { LoadingController } from 'ionic-angular';
 
@@ -18,7 +17,6 @@ export class RegisterPage {
   }
   public msgVazios:String;
   private erro:Boolean;
-  private API_URL = 'https://reqres.in/api/'
   constructor(public nav: NavController,public alertCtrl:AlertController,public simplejs :SimplejsProvider,public loadingCtrl: LoadingController) {
     
   }
@@ -45,7 +43,8 @@ export class RegisterPage {
         title: 'Atenção!',
         subTitle: `${this.msgVazios}`,
         buttons: ['OK']
-      }).present();
+      })
+      alert.present();
     }else{
       loader.dismiss()
       this.simplejs.postApi("teste",obj)

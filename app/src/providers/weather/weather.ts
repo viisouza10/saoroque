@@ -15,7 +15,7 @@ export class WeatherProvider {
       .map((res) => res)
       .toPromise()
       .then((sucess) => { 
-        return sucess.results;
+        return (<any>sucess).results;
       })
       .catch((err) => {
 

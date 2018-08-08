@@ -60,7 +60,7 @@ export class SimplejsProvider {
       .map((res) => res)
       .toPromise()
       .then((sucess) => { 
-        return JSON.parse(sucess._body);
+        return JSON.parse((<any>sucess)._body);
       })
       .catch((err) => {
         if (err.name == "TimeoutError" || (err.status == 0 && err.type == 3)) {
@@ -77,7 +77,7 @@ export class SimplejsProvider {
       .map((res) => res)
       .toPromise()
       .then((sucess) => {
-        return JSON.parse(sucess._body)
+        return JSON.parse((<any>sucess)._body)
       })
       .catch((err) => {
         if (err.name == "TimeoutError") {
@@ -93,7 +93,7 @@ export class SimplejsProvider {
       .map((res) => res)
       .toPromise()
       .then((sucess) => {
-        return JSON.parse(sucess._body)
+        return JSON.parse((<any>sucess)._body)
       })
       .catch((err) => {
         console.error(err)

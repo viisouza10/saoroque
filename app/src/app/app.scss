@@ -32,16 +32,20 @@
   background-color: color($colors, white);
 }
 
+.movie-bg {
+  background-color: color($colors, movie-color)!important;
+}
+
 .restaurant-bg {
-  background-color: color($colors, restaurant-color);
+  background-color: color($colors, restaurant-color)!important;
 }
 
 .hotel-bg {
-  background-color: color($colors, hotel-color);
+  background-color: color($colors, hotel-color)!important;
 }
 
 .attraction-bg {
-  background-color: color($colors, attraction-color);
+  background-color: color($colors, attraction-color)!important;
 }
 
 .padding-xs {

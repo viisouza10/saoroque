@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="attraction-color">
@@ -17,7 +11,7 @@
 
 
 <ion-content padding class="attractions common-bg">
-  <div class="card round" margin-bottom *ngFor="let attraction of attractions" (click)="verEvento(attraction)">
+  <div class="card round attraction-bg" margin-bottom *ngFor="let attraction of attractions" (click)="verEvento(attraction)">
     <div class="card-header" [ngStyle]="{'background-image': 'url(' + attraction.imagem + ')'}"></div>
     <div class="padding-xs">
       <h5>{{ attraction.nome }}</h5>
@@ -33,8 +27,8 @@
           <!-- <span ion-text color="attraction-color">{{ attraction.scores[1].name }}</span> -->
         </div>
         <div class="pull-right">
-            <span *ngIf="attraction.distancia > 0">{{ attraction.distancia }} km</span>
-            <span *ngIf="attraction.distancia <= 0">Você esta próximo</span>
+          <span *ngIf="attraction.distancia > 0">{{ attraction.distancia }} km</span>
+          <span *ngIf="attraction.distancia <= 0">Você esta próximo</span>
         </div>
         <div class="clear"></div>
       </div>

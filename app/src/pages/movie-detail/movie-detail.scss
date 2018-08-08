@@ -1,7 +1,7 @@
-page-restaurant-detail,
-.restaurant-detail {
+page-movie-detail,
+.movie-detail {
   // import extends css
-  $color-bar: color($colors, restaurant-color);
+  $color-bar: color($colors, movie-color);
   @import "../../theme/circle_progress";
   .item-header{
     background-position: center;

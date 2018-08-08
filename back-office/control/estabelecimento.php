@@ -59,13 +59,17 @@
           $this->redirect('/estabelecimento/listar');
           return $this->keys;
         }
+
         public function _actionListar() {
 
           #dados do tipo
-              $tipo = array(''=>'');
-              $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],0,'Selecione');
-
-              
+          $tipo = array(
+            'Evento' => 'Evento',
+            'Cinema' => 'Cinema',
+            'Hotel' => 'Hotel',
+            'Restaurante' => 'Restaurante'
+          );
+            $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],0);
 
           $steper = 15;
           $modulo = $this->getParameter('1');
@@ -93,18 +97,19 @@
               $tabela[0]['nome'] = 'Nome';
              $tabela[0]['endereco'] = 'Endereco';
              $tabela[0]['telefone'] = 'Telefone';
-             $tabela[0]['celular'] = 'Celular';
+             $tabela[0]['telefone2'] = 'Telefone2';
              $tabela[0]['tipo'] = 'Tipo';
              $tabela[0]['recomendacoes'] = 'Recomendacoes';
              
               $tabela[0]['acoes'] = 'Ações';
               $x = 1;
               foreach($dados as $dado) {
+                
                 $tabela[$x]['id'] = $dado['id'];
                 $tabela[$x]['nome'] = $dado['nome'];
                   $tabela[$x]['endereco'] = $dado['endereco'];
                   $tabela[$x]['telefone'] = $dado['telefone'];
-                  $tabela[$x]['celular'] = $dado['celular'];
+                  $tabela[$x]['telefone2'] = $dado['telefone2'];
                   $tabela[$x]['tipo'] = $dado['tipo'];
                   $tabela[$x]['recomendacoes'] = $dado['recomendacoes'];
                   
@@ -118,19 +123,27 @@
           }
 
           #aplica filtros
+          
           foreach($_SESSION['filtros'][$modulo] as $key => $value) {
             $key = str_replace('like','',$key);
             $this->keys['filtro_'.trim($key)] = $value;
           }
+          
           return $this->keys;
         }
         public function _actionInserir() {
           $tipo = array(
             'Evento' => 'Evento',
+            'Cinema' => 'Cinema',
             'Hotel' => 'Hotel',
             'Restaurante' => 'Restaurante'
           );
-            $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],1,'Selecione');#imagem
+          $status = array(
+            'Ativo' => 'Ativo',
+            'Inativo' => 'Inativo'
+          );
+            $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],1,'Selecione');
+            $this->keys['select_status'] = $this->html->select(false, $status, 'status_id',$this->keys['status_id']);
                 $this->keys['imagem'] = 'http://via.placeholder.com/500x375/';
               
           return $this->keys;
@@ -142,9 +155,8 @@
             }
           }
 
-          
-
           $_POST['usuario_id'] = $_SESSION['usuario_id'];
+
           $this->model->addData('estabelecimento',$_POST,true);
           die('sucesso;');
         }
@@ -153,11 +165,9 @@
 
           foreach ($_FILES as $key => $file) {
             if($file['tmp_name'] != '') {
-              $_POST[$key] = $this->file->uploadFile($file,'uploads/');
+              $_POST[$key] = $_SERVER['HTTP_ORIGIN'].'/uploads/'.$this->file->uploadFile($file,'uploads/');
             }
           }
-
-          
 
           $dado_id = $_REQUEST['id'];
           $this->model->alterData('estabelecimento',$_POST,array('id' => $dado_id));
@@ -165,12 +175,17 @@
         }
 
         public function _actionVer() {
-
+          
           $dado_id = $this->getParameter('3');
           $this->keys += $this->model->getOne('estabelecimento',$dado_id);
 
-          $tipo = array(''=>'');
-            $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo'],1,'Selecione');#imagem
+          $tipo = array(
+            'Evento' => 'Evento',
+            'Cinema' => 'Cinema',
+            'Hotel' => 'Hotel',
+            'Restaurante' => 'Restaurante'
+          );
+            $this->keys['select_tipo'] = $this->html->select(false, $tipo, 'tipo_id',$this->keys['tipo_id'],1,'Selecione');
             if($this->keys['imagem'] != '') {
               $this->keys['imagem'] = '/uploads/'.$this->keys['imagem'];
             } else {

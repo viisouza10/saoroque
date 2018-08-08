@@ -80,14 +80,17 @@ class api extends simplePHP {
             $sqlOrder= "rand()";
         }
 
-        $restaurantes = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "restaurante"),$limit,$sqlOrder);
+        $restaurantes = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("status" => "ativo", "tipo" => "restaurante"),$limit,$sqlOrder);
         if($restaurantes[0]['result'] != "empty") $res['restaurantes'] = $restaurantes;
 
-        $hoteis = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "hotel"),$limit,$sqlOrder);
+        $hoteis = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("status" => "ativo", "tipo" => "hotel"),$limit,$sqlOrder);
         if($hoteis[0]['result'] != "empty") $res['hoteis'] = $hoteis;
 
-        $eventos = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("tipo" => "evento"),$limit,$sqlOrder);
+        $eventos = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("status" => "ativo", "tipo" => "evento"),$limit,$sqlOrder);
         if($eventos[0]['result'] != "empty") $res['eventos'] = $eventos;
+
+        $filmes = $this->model->getData('estabelecimento','a.*'.$sqlDistancia,array("status" => "ativo","tipo" => "cinema"),$limit,$sqlOrder);
+        if($filmes[0]['result'] != "empty") $res['filmes'] = $filmes;
         
         $this->apiReturn("sucesso","",$res);
     }

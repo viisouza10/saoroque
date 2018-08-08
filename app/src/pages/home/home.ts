@@ -1,12 +1,11 @@
 import { Component } from "@angular/core";
 import { App, NavController, LoadingController } from "ionic-angular";
 import { GatewayService } from "../../services/gateway-service";
-import { HotelService } from "../../services/hotel-service";
-import { RestaurantService } from "../../services/restaurant-service";
-import { AttractionService } from "../../services/attraction-service";
 import { RestaurantDetailPage } from "../restaurant-detail/restaurant-detail";
 import { AttractionDetailPage } from "../attraction-detail/attraction-detail";
 import { HotelDetailPage } from "../hotel-detail/hotel-detail";
+import { MovieDetailPage } from "../movie-detail/movie-detail";
+import { MoviePage } from "../movie/movie";
 import { RestaurantsPage } from "../restaurants/restaurants";
 import { HotelsPage } from "../hotels/hotels";
 import { AttractionsPage } from "../attractions/attractions";
@@ -31,17 +30,19 @@ export class HomePage {
   public hotels: any;
   // attractions
   public attractions: any;
+  // movies
+  public movies: any;
 
   private hoje: Date = new Date();
 
   private arrayDia: Array<String> = [
     "seu <strong>Domingo</strong>",
-    "<strong>sua Segunda</strong>",
-    "<strong>sua Terça</strong>",
-    "<strong>sua Quarta</strong>",
-    "<strong>sua Quinta</strong>",
-    "<strong>sua Sexta</strong>",
-    "<strong>seu Sábado</strong>"
+    "sua <strong>Segunda</strong>",
+    "sua <strong>Terça</strong>",
+    "sua <strong>Quarta</strong>",
+    "sua <strong>Quinta</strong>",
+    "sua <strong>Sexta</strong>",
+    "seu <strong>Sábado</strong>"
   ];
 
   public diaSemana: String = this.arrayDia[this.hoje.getDay()];
@@ -53,44 +54,51 @@ export class HomePage {
     public app: App,
     public nav: NavController,
     public gatewayService: GatewayService,
-    public hotelService: HotelService,
-    public restaurantService: RestaurantService,
-    public attractionService: AttractionService,
     public wather: WeatherProvider,
     private geolocation: Geolocation,
     private estabelecimento: EstabelecimentoProvider,
-    public loading:LoadingController
+    public loading: LoadingController
   ) {
     const loader = this.loading.create({
-      content: "Buscando estabelecimentos, aguarde...",
+      content: "Buscando estabelecimentos, aguarde..."
     });
     loader.present();
-    this.geolocation.getCurrentPosition().then((resp) => {
-      // estabelecimento.getAll({}).then(res => {      
-      estabelecimento.getAll({"latitude": resp.coords.latitude,"longitude":resp.coords.longitude}).then(res => {      
-        this.restaurants = res.data.restaurantes;
-        this.hotels =  res.data.hoteis;
-        this.attractions =  res.data.eventos;
-        wather.tempo().then(res => {
-          this.clima = res.condition_slug;
-          this.temperatura = res.temp;
-          loader.dismiss();
+    this.geolocation
+      .getCurrentPosition()
+      .then(resp => {
+        // estabelecimento.getAll({}).then(res => {
+        this.estabelecimento
+          .getAll({
+            latitude: resp.coords.latitude,
+            longitude: resp.coords.longitude
+          })
+          .then(res => {
+            this.restaurants = res.data.restaurantes;
+            this.hotels = res.data.hoteis;
+            this.attractions = res.data.eventos;
+            this.movies = res.data.filmes;
+
+            wather.tempo().then(res => {
+              this.clima = res.condition_slug;
+              this.temperatura = res.temp;
+              loader.dismiss();
+            });
+          });
+      })
+      .catch(error => {
+        console.log("Error getting location", error);
+        estabelecimento.getAll({}).then(res => {
+          this.restaurants = res.data.restaurantes;
+          this.hotels = res.data.hoteis;
+          this.attractions = res.data.eventos;
+          this.movies = res.data.filmes;
+          wather.tempo().then(res => {
+            this.clima = res.condition_slug;
+            this.temperatura = res.temp;
+            loader.dismiss();
+          });
         });
       });
-     }).catch((error) => {
-       console.log('Error getting location', error);
-       estabelecimento.getAll({}).then(res => {      
-        this.restaurants = res.data.restaurantes;
-        this.hotels =  res.data.hoteis;
-        this.attractions =  res.data.eventos;
-        wather.tempo().then(res => {
-          this.clima = res.condition_slug;
-          this.temperatura = res.temp;
-          loader.dismiss();
-        });
-      });
-     });
-     
   }
 
   // make array with range is n
@@ -98,28 +106,35 @@ export class HomePage {
     return new Array(Math.round(n));
   }
 
-  todosRestaurantes(){
-    this.nav.push(RestaurantsPage,{restaurantes:this.restaurants})
+  todosFilmes() {
+    this.nav.push(MoviePage, { filmes: this.movies });
   }
 
-  todosHoteis(){
-    this.nav.push(HotelsPage,{hoteis:this.hotels})
+  todosRestaurantes() {
+    this.nav.push(RestaurantsPage, { restaurantes: this.restaurants });
   }
 
-  todosEventos(){
-    this.nav.push(AttractionsPage,{eventos:this.attractions})
+  todosHoteis() {
+    this.nav.push(HotelsPage, { hoteis: this.hotels });
+  }
+
+  todosEventos() {
+    this.nav.push(AttractionsPage, { eventos: this.attractions });
+  }
+
+  verFilme(filme) {
+    this.nav.push(MovieDetailPage, { filme: filme });
   }
 
   verRestaurante(restaurante) {
-    this.nav.push(RestaurantDetailPage, {restaurante: restaurante})
+    this.nav.push(RestaurantDetailPage, { restaurante: restaurante });
   }
 
   verHotel(hotel) {
-    this.nav.push(HotelDetailPage, {hotel: hotel})
+    this.nav.push(HotelDetailPage, { hotel: hotel });
   }
 
   verEvento(evento) {
-    this.nav.push(AttractionDetailPage, {evento: evento})
+    this.nav.push(AttractionDetailPage, { evento: evento });
   }
-  
 }
