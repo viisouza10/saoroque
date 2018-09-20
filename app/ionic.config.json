@@ -1,14 +1,14 @@
 {
   "name": "saoroqueapp",
-  "app_id": "79638a35",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   },
+  "type": "ionic-angular",
   "proxies": [
     {
-      "path":"/weather",
+      "path": "/weather",
       "proxyUrl": "https://api.hgbrasil.com/weather"
     }
-  ]
+  ],
+  "pro_id": "79638a35"
 }
