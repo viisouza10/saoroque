@@ -60,7 +60,7 @@ export class HomePage {
     public loading: LoadingController
   ) {
     const loader = this.loading.create({
-      content: "Buscando estabelecimentos, aguarde..."
+      content: "aguarde..."
     });
     loader.present();
     this.geolocation
@@ -68,15 +68,17 @@ export class HomePage {
       .then(resp => {
         // estabelecimento.getAll({}).then(res => {
         this.estabelecimento
-          .getAll({
-            latitude: resp.coords.latitude,
-            longitude: resp.coords.longitude
-          })
+          .getAll(
+            resp.coords.latitude,
+            resp.coords.longitude,
+            'market'
+          )
           .then(res => {
-            this.restaurants = res.data.restaurantes;
-            this.hotels = res.data.hoteis;
-            this.attractions = res.data.eventos;
-            this.movies = res.data.filmes;
+            console.table(res);
+            this.restaurants = res.restaurantes;
+            // this.hotels = res.data.hoteis;
+            // this.attractions = res.data.eventos;
+            // this.movies = res.data.filmes;
 
             wather.tempo().then(res => {
               this.clima = res.condition_slug;

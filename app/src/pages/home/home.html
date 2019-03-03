@@ -162,9 +162,9 @@
     </div>
     <div class="items" padding-left padding-bottom>
       <div class="card round restaurant-bg" *ngFor="let restaurant of restaurants" (click)="verRestaurante(restaurant)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.imagem + ')'}"></div>
+        <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.photo + ')'}"></div>
         <div class="padding-xs">
-          <h5>{{ restaurant.nome }}</h5>
+          <h5>{{ restaurant.name }}</h5>
           <div class="rating">
             <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
             <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
