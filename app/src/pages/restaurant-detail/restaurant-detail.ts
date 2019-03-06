@@ -4,12 +4,6 @@ import {RestaurantService} from "../../services/restaurant-service";
 
 declare var google: any;
 
-/*
- Generated class for the LoginPage page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-restaurant-detail',
   templateUrl: 'restaurant-detail.html'
@@ -50,7 +44,7 @@ export class RestaurantDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.restaurant.latitude, this.restaurant.longitude);
+    let latLng = new google.maps.LatLng(this.restaurant.geometry.location.lat, this.restaurant.geometry.location.lng);
 
     let mapOptions = {
       center: latLng,

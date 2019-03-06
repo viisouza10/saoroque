@@ -26,6 +26,7 @@ export class HotelDetailPage {
 
   constructor(public nav: NavController, public hotelService: HotelService, public platform: Platform,public navParams:NavParams) {
     this.hotel = navParams.get("hotel");
+    console.warn(this.hotel);
     
 
     // // process reviews data
@@ -50,7 +51,7 @@ export class HotelDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.hotel.latitude, this.hotel.longitude);
+    let latLng = new google.maps.LatLng(this.hotel.geometry.location.lat, this.hotel.geometry.location.lng);
 
     let mapOptions = {
       center: latLng,

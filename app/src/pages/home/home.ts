@@ -66,20 +66,13 @@ export class HomePage {
     this.geolocation
       .getCurrentPosition()
       .then(resp => {
-        // estabelecimento.getAll({}).then(res => {
         this.estabelecimento
-          .getAll(
-            resp.coords.latitude,
-            resp.coords.longitude,
-            'market'
-          )
+          .getAll()
           .then(res => {
-            console.table(res);
-            this.restaurants = res.restaurantes;
-            // this.hotels = res.data.hoteis;
-            // this.attractions = res.data.eventos;
-            // this.movies = res.data.filmes;
-
+            this.restaurants = res[0];
+            this.hotels = res[1];
+            console.warn(this.hotels);
+            
             wather.tempo().then(res => {
               this.clima = res.condition_slug;
               this.temperatura = res.temp;
@@ -89,17 +82,17 @@ export class HomePage {
       })
       .catch(error => {
         console.log("Error getting location", error);
-        estabelecimento.getAll({}).then(res => {
-          this.restaurants = res.data.restaurantes;
-          this.hotels = res.data.hoteis;
-          this.attractions = res.data.eventos;
-          this.movies = res.data.filmes;
-          wather.tempo().then(res => {
-            this.clima = res.condition_slug;
-            this.temperatura = res.temp;
-            loader.dismiss();
-          });
-        });
+        // estabelecimento.getAll({}).then(res => {
+        //   this.restaurants = res.data.restaurantes;
+        //   this.hotels = res.data.hoteis;
+        //   this.attractions = res.data.eventos;
+        //   this.movies = res.data.filmes;
+        //   wather.tempo().then(res => {
+        //     this.clima = res.condition_slug;
+        //     this.temperatura = res.temp;
+        //     loader.dismiss();
+        //   });
+        // });
       });
   }
 

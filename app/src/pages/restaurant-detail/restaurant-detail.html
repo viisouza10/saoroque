@@ -11,10 +11,10 @@
 
 <ion-content class=" item-detail">
   <!--header info-->
-  <div class="item-header" [ngStyle]="{'background-image': 'url(' + restaurant.imagem + ')'}">
+  <div class="item-header" [ngStyle]="{'background-image': 'url(' + restaurant.photo + ')'}">
     <div class="inner">
       <div class="align-bottom" padding>
-        <h2 ion-text color="white">{{ restaurant.nome }}</h2>
+        <h2 ion-text color="white">{{ restaurant.name }}</h2>
         <div>
           <!-- <ion-icon name="md-star" color="white" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
           <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
@@ -73,25 +73,25 @@
   </ion-grid> -->
 
   <!-- Show map here -->
-  <div id="map-detail"></div>
-
+  
   <!--Info-->
   <div class="border-bottom" padding>
-    <div>{{ restaurant.endereco }}</div>
     <div>
       <span class="text-sm" color="gray">Endereço</span>
     </div>
-    <div margin-top>
+    <div>{{ restaurant.vicinity }}</div>
+    <!-- <div margin-top>
       <span>{{ restaurant.telefone }}</span>
       <ion-icon class="pull-right" name="call" color="restaurant-color"></ion-icon>
     </div>
     <div>
       <span class="text-sm" color="gray">Telefone</span>
-    </div>
+    </div> -->
   </div>
+  <div id="map-detail"></div>
 
   <!--Reviews-->
-  <!-- <div class="border-bottom" padding>
+  <div class="border-bottom" padding>
     <span ion-text color="gray">Reviews</span>
     <ion-grid>
       <ion-row>
@@ -99,18 +99,19 @@
           <span class="rating-value" color="restaurant-color">
             {{ restaurant.rating }}
           </span>
+          <small color="light">{{ hotel.user_ratings_total }} <ion-icon name="people"></ion-icon></small>
         </ion-col>
-        <ion-col width-66>
+        <!-- <ion-col width-66>
           <div *ngFor="let value of ratingValues; let i = index">
             {{ i + 1 }}
             <ion-icon name="star" color="gray"></ion-icon>
             <span class="progress-bar restaurant-bg" [ngStyle]="{'width': value + 'rem'}"
                   color="restaurant-color"></span>
           </div>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
-  </div> -->
+  </div>
 
   <!--list of reviews-->
   <!-- <ion-list margin-top class="list-full-border reviews">
