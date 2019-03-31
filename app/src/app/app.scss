@@ -9,7 +9,7 @@
 // global styles
 
 .primary-bg {
-  background-color: color($colors, primary);
+  background-color: color($colors, primary)!important;
 }
 
 .secondary-bg {

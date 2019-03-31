@@ -1,5 +1,6 @@
 <?php
 #mac
+// die($_SERVER['HTTP_HOST'] ."==". MAC_URL);
 if($_SERVER['HTTP_HOST'] == MAC_URL) {
     $dsn = array(
         'phptype'  => 'mysql',
@@ -40,9 +41,11 @@ $options = array(
     'portability' => MDB2_PORTABILITY_ALL
 );
 
+
+
 /* SE NAO CONECTAR
 TENTA CONECTAR LOCALMENTE COM SENHAS COMUNS */
-if($_SERVER['HTTP_HOST'] == DEVEVOPMENT_URL) {
+if($_SERVER['HTTP_HOST'] == MAC_URL) {
     if (MDB2::connect($dsn, $options)->message == 'MDB2 Error: connect failed'){
         $dsn_pass[0] = 'root';
         $dsn_pass[1] = '';

@@ -13,7 +13,7 @@
     <ion-title [hidden]="(searchBy != 1) || showTypes">Restaurants</ion-title>
     <ion-title [hidden]="(searchBy != 2) || showTypes">Hotels</ion-title>
     <ion-title [hidden]="(searchBy != 3) || showTypes">Attractions</ion-title>
-    <ion-input placeholder="Search: City or Place" [hidden]="!showTypes" autofocus></ion-input>
+    <ion-input placeholder="Busque por lugares" [hidden]="!showTypes" autofocus></ion-input>
     <ion-buttons [hidden]="showTypes" end>
       <button ion-button (click)="showForm()">
         <ion-icon name="search" color="primary"></ion-icon>
@@ -58,8 +58,8 @@
           <ion-icon name="home" color="light"></ion-icon>
         </div>
         <div class="pull-left">
-          <h2>Stay - Hotels</h2>
-          <span ion-text color="gray">Nearby</span>
+          <h2>Hotéis</h2>
+          <span ion-text color="gray">Próximos</span>
         </div>
       </ion-item>
       <ion-item (click)="search(1)">
@@ -67,8 +67,8 @@
           <ion-icon name="restaurant" color="light"></ion-icon>
         </div>
         <div class="pull-left">
-          <h2>Eat - Restaurants</h2>
-          <span ion-text color="gray">Nearby</span>
+          <h2>Restaurantes</h2>
+          <span ion-text color="gray">Próximos</span>
         </div>
       </ion-item>
       <ion-item (click)="search(3)">
@@ -76,8 +76,8 @@
           <ion-icon name="bicycle" color="light"></ion-icon>
         </div>
         <div class="pull-left">
-          <h2>Play - Attractions</h2>
-          <span ion-text color="gray">Nearby</span>
+          <h2>Eventos</h2>
+          <span ion-text color="gray">Próximos</span>
         </div>
       </ion-item>
     </ion-list>

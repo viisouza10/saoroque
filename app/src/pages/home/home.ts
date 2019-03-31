@@ -1,39 +1,29 @@
 import { Component } from "@angular/core";
 import { App, NavController, LoadingController } from "ionic-angular";
-import { GatewayService } from "../../services/gateway-service";
-import { RestaurantDetailPage } from "../restaurant-detail/restaurant-detail";
-import { AttractionDetailPage } from "../attraction-detail/attraction-detail";
-import { HotelDetailPage } from "../hotel-detail/hotel-detail";
-import { MovieDetailPage } from "../movie-detail/movie-detail";
-import { MoviePage } from "../movie/movie";
 import { RestaurantsPage } from "../restaurants/restaurants";
 import { HotelsPage } from "../hotels/hotels";
-import { AttractionsPage } from "../attractions/attractions";
 import { Geolocation } from "@ionic-native/geolocation";
 import { WeatherProvider } from "../../providers/weather/weather";
 import { EstabelecimentoProvider } from "../../providers/estabelecimento/estabelecimento";
+import { PlaceDetailPage } from "../place-detail/place-detail";
+import { ActivityPage } from "../activity/activity";
 
-/*
- Generated class for the LoginPage page.
 
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
 export class HomePage {
-  // restaurants
-  public restaurants: any;
-  // hotels
-  public hotels: any;
-  // attractions
-  public attractions: any;
-  // movies
+
+  public near: any;
+
+  public attractions: any = [];
+
   public movies: any;
 
   private hoje: Date = new Date();
+
+  public welcomeText: String;
 
   private arrayDia: Array<String> = [
     "seu <strong>Domingo</strong>",
@@ -45,6 +35,8 @@ export class HomePage {
     "seu <strong>Sábado</strong>"
   ];
 
+  public categories: any = [];
+
   public diaSemana: String = this.arrayDia[this.hoje.getDay()];
 
   public clima: String;
@@ -53,7 +45,6 @@ export class HomePage {
   constructor(
     public app: App,
     public nav: NavController,
-    public gatewayService: GatewayService,
     public wather: WeatherProvider,
     private geolocation: Geolocation,
     private estabelecimento: EstabelecimentoProvider,
@@ -62,19 +53,81 @@ export class HomePage {
     const loader = this.loading.create({
       content: "aguarde..."
     });
+
+    if (this.hoje.getHours() >= 0 && this.hoje.getHours() <= 12) {
+      this.welcomeText = "Bom Dia";
+    }
+    if (this.hoje.getHours() > 12 && this.hoje.getHours() <= 18) {
+      this.welcomeText = "Boa Tarde";
+    }
+    if (this.hoje.getHours() > 18 && this.hoje.getHours() <= 24) {
+      this.welcomeText = "Boa Noite";
+    }
+
     loader.present();
     this.geolocation
       .getCurrentPosition()
       .then(resp => {
         this.estabelecimento
-          .getAll()
+          .getAll("distance",true,resp.coords.latitude,resp.coords.longitude)
           .then(res => {
-            this.restaurants = res[0];
-            this.hotels = res[1];
-            console.warn(this.hotels);
-            
+            console.warn("Res",res);
+            this.attractions['movies'] = res[2];
+            this.attractions['events'] = res[3];
+            this.categories.push({
+              name:"Filmes",
+              icons:["ios-videocam-outline","ios-closed-captioning-outline"],
+              data:res[2],
+              handleAll:()=>{
+                console.log("go filmes")
+                this.nav.push(ActivityPage, { attractions:this.attractions,activity:'movies' });
+              },
+              handle:(item)=>{
+                this.nav.push(PlaceDetailPage, { item });
+              }
+            })
+            this.categories.push({
+              name:"Eventos",
+              icons:["ios-musical-note-outline","ios-microphone-outline"],
+              data:res[3],
+              handleAll:()=>{
+                this.nav.push(ActivityPage, { attractions:this.attractions,activity:'events' });
+              },
+              handle:(item)=>{
+                this.nav.push(PlaceDetailPage, { item });
+              }
+            })
+            this.categories.push({
+              name:"Próximos",
+              icons:["ios-pin-outline","ios-navigate-outline"],
+              data:res[0],
+              handleAll:(itens)=>{
+                this.nav.push(HotelsPage, { itens:itens });
+                // TODO:mudar hotelspage
+              },
+              handle:(item)=>{
+                this.nav.push(PlaceDetailPage, { item });
+              }
+            })
+
             wather.tempo().then(res => {
-              this.clima = res.condition_slug;
+              console.warn(res);
+              switch (res.condition_slug) {
+                case "storm":
+                  this.clima = "thunderstorm";
+                  break;
+                case "cloudly_night":
+                  this.clima = "cloudy-night";
+                  break;
+                case "clear_night":
+                  this.clima = "moon";
+                  break;
+
+                default:
+                  this.clima = res.condition_slug
+                  break;
+              }
+
               this.temperatura = res.temp;
               loader.dismiss();
             });
@@ -99,37 +152,5 @@ export class HomePage {
   // make array with range is n
   range(n) {
     return new Array(Math.round(n));
-  }
-
-  todosFilmes() {
-    this.nav.push(MoviePage, { filmes: this.movies });
-  }
-
-  todosRestaurantes() {
-    this.nav.push(RestaurantsPage, { restaurantes: this.restaurants });
-  }
-
-  todosHoteis() {
-    this.nav.push(HotelsPage, { hoteis: this.hotels });
-  }
-
-  todosEventos() {
-    this.nav.push(AttractionsPage, { eventos: this.attractions });
-  }
-
-  verFilme(filme) {
-    this.nav.push(MovieDetailPage, { filme: filme });
-  }
-
-  verRestaurante(restaurante) {
-    this.nav.push(RestaurantDetailPage, { restaurante: restaurante });
-  }
-
-  verHotel(hotel) {
-    this.nav.push(HotelDetailPage, { hotel: hotel });
-  }
-
-  verEvento(evento) {
-    this.nav.push(AttractionDetailPage, { evento: evento });
   }
 }

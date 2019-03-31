@@ -1,35 +1,30 @@
-import {Component} from "@angular/core";
-import {NavController, Platform, NavParams} from "ionic-angular";
-
+import { Component } from "@angular/core";
+import { NavController, Platform, NavParams } from "ionic-angular";
 
 declare var google: any;
 
 @Component({
-  selector: 'page-movie-detail',
-  templateUrl: 'movie-detail.html'
+  selector: 'page-place-detail',
+  templateUrl: 'place-detail.html'
 })
-export class MovieDetailPage {
-  // attraction info
-  public movie: any;
+export class PlaceDetailPage {
+  // item info
+  public item: any;
+  public tipo: String;
+
   // default rating
   public rating = 0;
+  public theme: String;
+
   // Map
   public map: any;
-  // rating values
-  public ratingValues = [0, 0, 0, 0, 0];
 
-  constructor(public nav: NavController, public platform: Platform,public navParams: NavParams) {
-    // // set sample data
-    // this.movie = attractionService.getItem(1);
-    this.movie = navParams.get("filme");
-    console.log(this.movie);
-    
-    // // process reviews data
-    // for (let key in this.movie.reviews) {
-    //   this.ratingValues[this.movie.reviews[key].rating - 1]++;
-    // }
+  constructor(public nav: NavController, public platform: Platform, public navParams: NavParams) {
+    this.item = navParams.get("item");
+    console.log("item",this.item);
+    // this.tipo = navParams.get("tipo");
+    this.theme = `primary`;
   }
-
 
   ionViewDidLoad() {
     // init map
@@ -47,7 +42,7 @@ export class MovieDetailPage {
   }
 
   initializeMap() {
-    let latLng = new google.maps.LatLng(this.movie.latitude, this.movie.longitude);
+    let latLng = new google.maps.LatLng(this.item.geometry.location.lat, this.item.geometry.location.lng);
 
     let mapOptions = {
       center: latLng,

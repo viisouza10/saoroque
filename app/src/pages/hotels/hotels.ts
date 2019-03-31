@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 import {NavController, NavParams} from "ionic-angular";
-import {HotelService} from "../../services/hotel-service";
-import {HotelDetailPage} from "../hotel-detail/hotel-detail";
+import { PlaceDetailPage } from "../place-detail/place-detail";
 
 /*
  Generated class for the LoginPage page.
@@ -15,15 +14,15 @@ import {HotelDetailPage} from "../hotel-detail/hotel-detail";
 })
 export class HotelsPage {
   // list of hotels
-  public hotels;
+  public itens;
 
-  constructor(public nav: NavController, public hotelService: HotelService,public navParams :NavParams) {    
-    this.hotels = navParams.get("hoteis");
+  constructor(public nav: NavController,public navParams :NavParams) {    
+    this.itens = navParams.get("itens");
   }
 
   // view hotel detail
-  verHotel(hotel) {
-    this.nav.push(HotelDetailPage, {hotel: hotel})
+  open(item) {
+    this.nav.push(PlaceDetailPage, { item });
   }
 
   // make array with range is n

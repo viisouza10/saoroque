@@ -1,33 +1,26 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
-import {ActivityService} from "../../services/activity-service";
+import {NavController, NavParams} from "ionic-angular";
 
-/*
- Generated class for the LoginPage page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-activity',
   templateUrl: 'activity.html'
 })
 export class ActivityPage {
   // activities
-  public activities: any;
+  public activity:string = "movies";
+  public movies: any;
+  public events: any;
 
-  constructor(public nav: NavController, public activityService: ActivityService) {
-    // set sample data
-    this.activities = activityService.getAll();
+  constructor(public nav: NavController,private navParams:NavParams) {
+    console.warn(this.navParams.data);
+    this.activity = this.navParams.data.activity;
+    this.movies = this.navParams.data.attractions.movies;
+    this.events = this.navParams.data.attractions.events;    
+  }
+  setActivity(act){
+    console.warn("act",act);
+    
+    this.activity = act;
   }
 
-  // make array with range is n
-  range(n) {
-    return new Array(Math.round(n));
-  }
-
-  // toggle like an activity
-  toggleLike(activity) {
-    activity.is_liked = !activity.is_liked;
-  }
 }

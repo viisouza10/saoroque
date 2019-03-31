@@ -8,66 +8,47 @@ import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from "@angular/http";
 import { Network } from "@ionic-native/network";
 import { Geolocation } from '@ionic-native/geolocation';
+
 import {
   FileTransfer
 } from "@ionic-native/file-transfer";
 
-// import services
-import { FoodCategoryService } from "../services/food-category-service";
-import { FoodService } from "../services/food-service";
-import { GatewayService } from "../services/gateway-service";
-import { HotelService } from "../services/hotel-service";
-import { RestaurantService } from "../services/restaurant-service";
-import { ActivityService } from "../services/activity-service";
-import { AttractionService } from "../services/attraction-service";
-import { ContactService } from "../services/contact-service";
-// end import services
-
 // import pages
-import { ActivityPage } from "../pages/activity/activity";
-import { AttractionDetailPage } from "../pages/attraction-detail/attraction-detail";
-import { AttractionsPage } from "../pages/attractions/attractions";
 import { FindFriendPage } from "../pages/find-friend/find-friend";
 import { HomePage } from "../pages/home/home";
-import { HotelDetailPage } from "../pages/hotel-detail/hotel-detail";
+import { PlaceDetailPage } from "../pages/place-detail/place-detail";
 import { HotelsPage } from "../pages/hotels/hotels";
 import { LoginPage } from "../pages/login/login";
 import { MainTabsPage } from "../pages/main-tabs/main-tabs";
 import { ModalFilterPage } from "../pages/modal-filter/modal-filter";
-import { MovieDetailPage } from "../pages/movie-detail/movie-detail";
-import { MoviePage } from "../pages/movie/movie";
 import { MyProfilePage } from "../pages/my-profile/my-profile";
 import { RegisterPage } from "../pages/register/register";
-import { RestaurantDetailPage } from "../pages/restaurant-detail/restaurant-detail";
 import { RestaurantsPage } from "../pages/restaurants/restaurants";
 import { SearchPage } from "../pages/search/search";
 import { SettingPage } from "../pages/setting/setting";
 import { WelcomePage } from "../pages/welcome/welcome";
-import { CadastroProvider } from "../providers/cadastro/cadastro";
 import { SimplejsProvider } from "../providers/simplejs/simplejs";
 import { WeatherProvider } from '../providers/weather/weather';
 import { EstabelecimentoProvider } from '../providers/estabelecimento/estabelecimento';
-// import { SimplejsProvider } from '../providers/simplejs/simplejs';
+import { RestaurantService } from "../services/restaurant-service";
+import { HotelService } from "../services/hotel-service";
+import { AttractionService } from "../services/attraction-service";
+import { ActivityPage } from "../pages/activity/activity";
 // end import pages
 
 @NgModule({
   declarations: [
     MyApp,
-    ActivityPage,
-    AttractionDetailPage,
-    AttractionsPage,
     FindFriendPage,
+    ActivityPage,
     HomePage,
-    HotelDetailPage,
+    PlaceDetailPage,
     HotelsPage,
     LoginPage,
     MainTabsPage,
     ModalFilterPage,
-    MovieDetailPage,
-    MoviePage,
     MyProfilePage,
     RegisterPage,
-    RestaurantDetailPage,
     RestaurantsPage,
     SearchPage,
     SettingPage,
@@ -88,21 +69,16 @@ import { EstabelecimentoProvider } from '../providers/estabelecimento/estabeleci
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ActivityPage,
-    AttractionDetailPage,
-    AttractionsPage,
     FindFriendPage,
+    ActivityPage,
     HomePage,
-    HotelDetailPage,
+    PlaceDetailPage,
     HotelsPage,
     LoginPage,
     MainTabsPage,
     ModalFilterPage,
-    MovieDetailPage,
-    MoviePage,
     MyProfilePage,
     RegisterPage,
-    RestaurantDetailPage,
     RestaurantsPage,
     SearchPage,
     SettingPage,
@@ -111,20 +87,14 @@ import { EstabelecimentoProvider } from '../providers/estabelecimento/estabeleci
   providers: [
     StatusBar,
     SplashScreen,
-    FoodCategoryService,
-    FoodService,
-    GatewayService,
-    HotelService,
     RestaurantService,
+    HotelService,
     Network,
     Geolocation,
-    ActivityService,
-    AttractionService,
-    ContactService,
-    CadastroProvider,
     SimplejsProvider,
     FileTransfer,
     WeatherProvider,
+    AttractionService,
     EstabelecimentoProvider
     /* import services */
   ]

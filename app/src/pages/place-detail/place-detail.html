@@ -9,20 +9,20 @@
 </ion-header>
 
 
-<ion-content class=" item-detail">
+<ion-content class="item-detail">
   <!--header info-->
-  <div class="item-header" [ngStyle]="{'background-image': 'url(' + hotel.photo + ')'}">
+  <div class="item-header" [ngStyle]="{'background-image': 'url(' + item.photo + ')'}">
     <div class="inner">
       <div class="align-bottom" padding>
-        <h2 ion-text color="white">{{ hotel.name }}</h2>
+        <h2 ion-text color="white">{{ item.name }}</h2>
         <div>
-          <ion-icon name="md-star" color="white" *ngFor="let star of range(hotel.rating)"></ion-icon>
-          <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon>
-          <span ion-text color="white">{{ hotel.user_ratings_total }} reviews</span>
+          <ion-icon name="md-star" color="white" *ngFor="let star of range(item.rating)"></ion-icon>
+          <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - item.rating)"></ion-icon>
+          <span ion-text color="white">{{ item.user_ratings_total }} reviews</span>
         </div>
         <div>
-          <span ion-text color="white" *ngIf="hotel.distancia > 0">{{ hotel.distancia }} km</span>
-          <span ion-text color="white" *ngIf="hotel.distancia <= 0 && hotel.latitude">Você esta próximo</span>
+          <span ion-text color="white" *ngIf="item.distancia > 0">{{ item.distancia }} km</span>
+          <span ion-text color="white" *ngIf="item.distancia <= 0 && item.latitude">Você esta próximo</span>
         </div>
       </div>
     </div>
@@ -50,9 +50,9 @@
   <div class="border-bottom" text-center padding>
     <span class="bold" color="gray">Avalie</span>
     <div class="rating-form">
-      <ion-icon name="ios-star" color="hotel-color" *ngFor="let star of range(rating); let i = index"
+      <ion-icon name="ios-star" [color]="theme" *ngFor="let star of range(rating); let i = index"
                 (click)="rate(i + 1)"></ion-icon>
-      <ion-icon name="ios-star-outline" color="hotel-color" *ngFor="let star of range(5 - rating); let i = index"
+      <ion-icon name="ios-star-outline" [color]="theme" *ngFor="let star of range(5 - rating); let i = index"
                 (click)="rate(i + rating + 1)"></ion-icon>
     </div>
   </div>
@@ -60,7 +60,7 @@
   <!--scores-->
   <!-- <ion-grid>
     <ion-row>
-      <ion-col text-center *ngFor="let score of hotel.scores; let i=index" [hidden]="i > 3">
+      <ion-col text-center *ngFor="let score of item.scores; let i=index" [hidden]="i > 3">
         <div class="progress-container p-{{ score.score }}">
           <div class="info">
             <span class="text-1x5">{{ score.score }}</span><span class="text-sm">%</span>
@@ -77,34 +77,34 @@
     <div>
       <span class="text-sm" color="gray">Endereço</span>
     </div>
-    <div>{{ hotel.vicinity }}</div>
-    <div margin-top>
+    <div>{{ item.vicinity }}</div>
+    <!-- <div margin-top>
       <span>(11) 94983-7328</span>
-      <ion-icon class="pull-right" name="call" color="hotel-color"></ion-icon>
+      <ion-icon class="pull-right" name="call" [color]="theme"></ion-icon>
     </div>
     <div>
       <span class="text-sm" color="gray">Telefone</span>
-    </div>
+    </div> -->
   </div>
 
   <!--Reviews-->
-  <div class="border-bottom" padding *ngIf="hotel.rating">
+  <div class="border-bottom" padding *ngIf="item.rating">
     <span ion-text color="gray">Avaliação</span>
     <ion-grid>
       <ion-row>
         <ion-col width-33 class="middle-align">
-          <span class="rating-value" color="hotel-color">
-            {{ hotel.rating }}
-            <ion-icon name="ios-star" color="hotel-color"></ion-icon>
+          <span class="rating-value" >
+            {{ item.rating }}
+            <ion-icon name="ios-star" [color]="theme"></ion-icon>
           </span>
-          <!-- <small color="light">{{ hotel.user_ratings_total }} <ion-icon name="people"></ion-icon></small> -->
+          <!-- <small color="light">{{ item.user_ratings_total }} <ion-icon name="people"></ion-icon></small> -->
         </ion-col>
         <!-- <ion-col width-66>
           <div *ngFor="let value of ratingValues; let i = index">
             {{ i + 1 }}
             <ion-icon name="star" color="gray"></ion-icon>
-            <span class="progress-bar hotel-bg" [ngStyle]="{'width': value + 'rem'}"
-                  color="hotel-color"></span>
+            <span class="progress-bar primary" [ngStyle]="{'width': value + 'rem'}"
+                  [color]="theme"></span>
           </div>
         </ion-col> -->
       </ion-row>
@@ -116,7 +116,7 @@
 
   <!--list of reviews-->
   <!-- <ion-list margin-top class="list-full-border reviews">
-    <div *ngFor="let review of hotel.reviews">
+    <div *ngFor="let review of item.reviews">
       <ion-item text-wrap>
         <ion-avatar item-left>
           <img src="{{ review.avatar }}">
@@ -126,7 +126,7 @@
           <span ion-text color="gray">from {{ review.from }}</span>
         </div>
         <div class="text-sm">
-          <ion-icon name="md-star" color="hotel-color" *ngFor="let start of range(review.rating)"></ion-icon>
+          <ion-icon name="md-star" [color]="theme" *ngFor="let start of range(review.rating)"></ion-icon>
         </div>
         <div>
           <span ion-text color="gray">{{ review.content }}</span>
@@ -134,11 +134,11 @@
 
         <div>Recommended for:</div>
         <div>
-          <span *ngFor="let score of hotel.scores">
-            <span ion-text color="hotel-color" *ngIf="score.id == review.recommended_for[0]">{{ score.name }},</span>
+          <span *ngFor="let score of item.scores">
+            <span ion-text [color]="theme" *ngIf="score.id == review.recommended_for[0]">{{ score.name }},</span>
           </span>
-          <span *ngFor="let score of hotel.scores">
-            <span ion-text color="hotel-color" *ngIf="score.id == review.recommended_for[1]">{{ score.name }}</span>
+          <span *ngFor="let score of item.scores">
+            <span ion-text [color]="theme" *ngIf="score.id == review.recommended_for[1]">{{ score.name }}</span>
           </span>
         </div>
       </ion-item>

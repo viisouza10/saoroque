@@ -3,183 +3,59 @@
   <div class="header rlt">
     <div class="align-bottom" padding>
       <div class="pull-left">
-        <h2 ion-text color="white">
-          <ion-icon name="ios-navigate-outline"></ion-icon>
-          BOM DIA
-        </h2>
+        <h1 ion-text color="white">
+          {{welcomeText.toUpperCase()}}
+        </h1>
         <span ion-text color="light">
           Recomendações para
-          <span [innerHtml]="diaSemana"></span>
-          <!-- Your <strong>Tuesday</strong> Recommendations -->
+          <strong [innerHtml]="diaSemana"></strong>
         </span>
       </div>
       <div class="pull-right">
         <h1>
-          <ion-icon name="ios-{{clima}}-outline" color="light"></ion-icon>
+          <ion-icon name="md-{{clima}}" color="light"></ion-icon>
+          <span class="temperatura" color="light" *ngIf="temperatura">
+            {{temperatura}}
+            <sup>o</sup>C
+          </span>
         </h1>
-        <h6 ion-text no-margin color="light" *ngIf="temperatura">
-          {{temperatura}}
-          <sup>o</sup>C
-        </h6>
       </div>
       <div class="clear"></div>
-    </div>
-  </div>
-
-  <!--list of movies-->
-  <div class="block" *ngIf="movies" margin-top>
-    <div class="block-title" padding-left padding-right>
-      <div class="pull-left">
-        <ion-icon name="md-film" color="movie-color"></ion-icon>
-        <span ion-text color="movie-color">CINEMA</span>
-
-      </div>
-      <div class="pull-right">
-        <span ion-text color="movie-color" (click)="todosFilmes()">VER TUDO &gt;</span>
-      </div>
-      <div class="clear"></div>
-    </div>
-    <div class="items" padding-left padding-bottom>
-      <div class="card round movie-bg"  *ngFor="let movie of movies | slice:0:5;" (click)="verFilme(movie)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + movie.imagem + ')'}"></div>
-        <div class="padding-xs">
-          <h5>{{ movie.nome }}</h5>
-          <div class="rating">
-            <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(movie.rating)"></ion-icon> -->
-            <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - movie.rating)"></ion-icon> -->
-            <!-- <span ion-text color="gray">{{ movie.reviews.length }} reviews</span> -->
-          </div>
-          <!-- <span ion-text color="gray">Recommended for:</span> -->
-          <div>
-            <!-- <div class="pull-left">
-                <span ion-text color="restaurant-color">{{ movie.scores[0].name }},</span>
-                <span ion-text color="restaurant-color">{{ movie.scores[1].name }}</span>
-              </div> -->
-            <div class="pull-right">
-              <!-- {{ movie.location.distance }} km -->
-              <span *ngIf="movie.distancia > 0">{{ movie.distancia }} km</span>
-              <span *ngIf="movie.distancia <= 0 && movie.latitude">Você esta próximo</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--list of events-->
-  <div class="block" *ngIf="attractions">
-    <div class="block-title" padding-left padding-right>
-      <div class="pull-left">
-        <ion-icon name="ios-beer" color="attraction-color"></ion-icon>
-        <span ion-text color="attraction-color">EVENTOS</span>
-      </div>
-      <div class="pull-right">
-        <span ion-text color="attraction-color" (click)="todosEventos()">VER TUDO &gt;</span>
-      </div>
-      <div class="clear"></div>
-    </div>
-    <div class="items" padding-left padding-bottom>
-      <div class="card round attraction-bg" *ngFor="let attraction of attractions | slice:0:5;" (click)="verEvento(attraction)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + attraction.photo + ')'}"></div>
-        <div class="padding-xs">
-          <h5>{{ attraction.name }}</h5>
-          <div class="rating">
-            <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(attraction.rating)"></ion-icon> -->
-            <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - attraction.rating)"></ion-icon> -->
-            <!-- <span ion-text color="gray">{{ attraction.reviews.length }} reviews</span> -->
-          </div>
-          <!-- <span ion-text color="gray">Recommended for:</span> -->
-          <div>
-            <div class="pull-left">
-              <!-- <span ion-text color="restaurant-color">{{ attraction.scores[0].name }},</span>
-                <span ion-text color="restaurant-color">{{ attraction.scores[1].name }}</span> -->
-            </div>
-            <div class="pull-right">
-              <span *ngIf="attraction.distancia > 0">{{ attraction.distancia }} km</span>
-              <span *ngIf="attraction.distancia <= 0">Você esta próximo</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   
-  <!--list of hotels-->
-  <div class="block" *ngIf="hotels">
+  <!--list of categories-->
+  <div class="block"   *ngFor="let cat of categories">
     <div class="block-title" padding-left padding-right>
       <div class="pull-left">
-        <ion-icon name="home" color="hotel-color"></ion-icon>
-        <span ion-text color="hotel-color">HOTÉIS</span>
+        <ion-icon *ngFor="let icon of cat.icons" name="{{icon}}" color="primary"></ion-icon>
+        <span ion-text color="primary">{{cat.name}}</span>
       </div>
       <div class="pull-right">
-        <span ion-text color="hotel-color" (click)="todosHoteis()">VER TUDO &gt;</span>
+        <span ion-text color="primary" (click)="cat.handleAll(cat.data)">ver mais &gt;</span>
       </div>
-      <div class="clear"></div>
     </div>
     <div class="items" padding-left padding-bottom>
-      <div class="card round hotel-bg" color="hotel-color" *ngFor="let hotel of hotels | slice:0:5;" (click)="verHotel(hotel)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + hotel.photo + ')'}"></div>
-        <div class="padding-xs">
-          <h5>{{ hotel.name }}</h5>
+      <div class="card round primary-bg" color="primary" *ngFor="let iten of cat.data | slice:0:5;" (click)="open(iten)">
+        <div class="card-header"  [ngStyle]="{'background-image': 'url(' + iten.photo + ')'}"></div>
+        <div class="padding-xs" color="primary">
+          <h5>{{ iten.name }}</h5>
           <div class="rating">
-            <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(hotel.rating)"></ion-icon> -->
-            <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - hotel.rating)"></ion-icon> -->
-            <!-- <span ion-text color="gray">{{ hotel.reviews.length }} reviews</span> -->
+            <!-- <ion-icon name="md-star" color="light" *ngFor="let star of range(iten.rating)"></ion-icon> -->
+            <!-- <ion-icon name="md-star-outline" color="light" *ngFor="let star of range(5 - iten.rating)"></ion-icon> -->
           </div>
           <!-- <span ion-text color="gray">Recommended for:</span> -->
           <div>
             <!-- <div class="pull-left">
-                  <span ion-text color="restaurant-color">{{ hotel.scores[0].name }},</span>
-                  <span ion-text color="restaurant-color">{{ hotel.scores[1].name }}</span>
+                  <span ion-text color="restaurant-color">{{ iten.scores[0].name }},</span>
+                  <span ion-text color="restaurant-color">{{ iten.scores[1].name }}</span>
                 </div> -->
             <div class="pull-right">
-              <span *ngIf="hotel.distancia > 0">{{ hotel.distancia }} km</span>
-              <span *ngIf="hotel.distancia <= 0 && hotel.latitude">Você esta próximo</span>
-              <span *ngIf="!hotel.latitude">
+              <span *ngIf="iten.distancia > 0">{{ iten.distancia }} km</span>
+              <span *ngIf="iten.distancia <= 0 && iten.latitude">Você esta próximo</span>
+              <span *ngIf="!iten.latitude">
                 <br>
               </span>
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--list of restaurants-->
-  <div class="block" *ngIf="restaurants" margin-top>
-    <div class="block-title" padding-left padding-right>
-      <div class="pull-left">
-        <ion-icon name="restaurant" color="restaurant-color"></ion-icon>
-        <span ion-text color="restaurant-color">RESTAURANTES</span>
-
-      </div>
-      <div class="pull-right">
-        <span ion-text color="restaurant-color" (click)="todosRestaurantes()">VER TUDO &gt;</span>
-      </div>
-      <div class="clear"></div>
-    </div>
-    <div class="items" padding-left padding-bottom>
-      <div class="card round restaurant-bg" *ngFor="let restaurant of restaurants | slice:0:5;" (click)="verRestaurante(restaurant)">
-        <div class="card-header" [ngStyle]="{'background-image': 'url(' + restaurant.photo + ')'}"></div>
-        <div class="padding-xs">
-          <h5>{{ restaurant.name }}</h5>
-          <div class="rating">
-            <!-- <ion-icon name="md-star" color="restaurant-color" *ngFor="let star of range(restaurant.rating)"></ion-icon> -->
-            <!-- <ion-icon name="md-star" color="gray" *ngFor="let star of range(5 - restaurant.rating)"></ion-icon> -->
-            <!-- <span ion-text color="gray">{{ restaurant.reviews.length }} reviews</span> -->
-          </div>
-          <!-- <span ion-text color="gray">Recommended for:</span> -->
-          <div>
-            <!-- <div class="pull-left">
-              <span ion-text color="restaurant-color">{{ restaurant.scores[0].name }},</span>
-              <span ion-text color="restaurant-color">{{ restaurant.scores[1].name }}</span>
-            </div> -->
-            <div class="pull-right">
-              <!-- {{ restaurant.location.distance }} km -->
-              <span *ngIf="restaurant.distancia > 0">{{ restaurant.distancia }} km</span>
-              <span *ngIf="restaurant.distancia <= 0 && restaurant.latitude">Você esta próximo</span>
             </div>
             <div class="clear"></div>
           </div>
@@ -193,9 +69,12 @@
 
   <!--float search bar-->
   <!-- <div class="float-search" padding>
-    <ion-input class="card round" placeholder="Search"></ion-input>
-    <button ion-button menuToggle color="white" item-left>
-      <ion-icon name="ios-menu" color="primary"></ion-icon>
+    <ion-input class="card round" placeholder="O que você procura?"></ion-input>
+    <button ion-button color="white" item-left>
+      <ion-icon name="md-search" color="primary"></ion-icon>
+    </button>
+    <button ion-button color="white" class="btn-buscar">
+      Buscar
     </button>
   </div> -->
 

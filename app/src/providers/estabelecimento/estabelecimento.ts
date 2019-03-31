@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { SimplejsProvider } from "../../providers/simplejs/simplejs";
-import { Http, URLSearchParams } from '@angular/http';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class EstabelecimentoProvider {
@@ -16,12 +16,31 @@ export class EstabelecimentoProvider {
   getAll(rankby: string = "distance", opennow: boolean = true, lat: number = -23.5294771, long: number = -47.138349, city: string = "São Roque") {
     return Promise.all(
       [
-        this.getCat("food", "restaurante", rankby, opennow, lat, long, city),
+        this.getCat("food,point_of_interest", "comida", rankby, opennow, lat, long, city),
         this.getCat("lodging", "hotel", rankby, opennow, lat, long, city),
+        this.getMovies(),
+        this.getEvents(),
         // this.getCat("night club", false, rankby, opennow, lat, long, city)
       ]
     )
   }
+
+  getMovies(){
+    return new Promise((resolve, reject) => {
+      this.SIMPLEJS.getApi("getMovies").then(movies =>{
+        resolve(movies.data);
+      })
+    })
+  }
+
+  getEvents(){
+    return new Promise((resolve, reject) => {
+      this.SIMPLEJS.getApi("getEvents").then(events =>{
+        resolve(events.data);
+      })
+    })
+  }
+
 
   async getCat(type, keyword, rankby, opennow, lat, long, city) {
     var data = [];
@@ -29,6 +48,7 @@ export class EstabelecimentoProvider {
 
     if(type)data['type'] = type;
     if(keyword)data['keyword'] = keyword;
+    data['keyword'] = data['keyword']+ " " +city;
     data['location'] = `${lat.toString()},${long.toString()}`;
     data['rankby'] = rankby;
 
@@ -50,6 +70,11 @@ export class EstabelecimentoProvider {
           data.forEach(element => {
             var img = element.photos ? element.photos[0] : "";
             element.photo = img.photo_reference ?`https://maps.googleapis.com/maps/api/place/photo?maxwidth=250&maxheight=156&photoreference=${img.photo_reference}&sensor=false&key=${this.key}` : 'assets/img/default_place.png';
+          });
+          data.sort(function(a, b){
+            if(a.rating > b.rating)return -1
+            if(a.rating < b.rating)return 1
+            return
           });
           resolve(data);
         })

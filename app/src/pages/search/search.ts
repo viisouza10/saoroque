@@ -4,9 +4,7 @@ import {RestaurantService} from "../../services/restaurant-service";
 import {HotelService} from "../../services/hotel-service";
 import {AttractionService} from "../../services/attraction-service";
 import {ModalFilterPage} from "../modal-filter/modal-filter";
-import {RestaurantDetailPage} from "../restaurant-detail/restaurant-detail";
-import {HotelDetailPage} from "../hotel-detail/hotel-detail";
-import {AttractionDetailPage} from "../attraction-detail/attraction-detail";
+
 declare var google: any;
 
 
@@ -154,12 +152,12 @@ export class SearchPage {
   viewItem(id) {
 
     // search by restaurant
-    if (this.searchBy == 1) {
-      this.app.getRootNav().push(RestaurantDetailPage, {id: id})
-    } else if (this.searchBy == 2) { // search by hotel
-      this.app.getRootNav().push(HotelDetailPage, {id: id})
-    } else { // search by attraction
-      this.app.getRootNav().push(AttractionDetailPage, {id: id})
-    }
+    // if (this.searchBy == 1) {
+    //   this.app.getRootNav().push(RestaurantDetailPage, {id: id})
+    // } else if (this.searchBy == 2) { // search by hotel
+    //   this.app.getRootNav().push(HotelDetailPage, {id: id})
+    // } else { // search by attraction
+    //   this.app.getRootNav().push(AttractionDetailPage, {id: id})
+    // }
   }
 }

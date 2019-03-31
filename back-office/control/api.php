@@ -60,6 +60,14 @@ class api extends simplePHP {
         exit;
     }
 
+    public function _actionGetEvents(){
+        $res = $this->model->getData("eventos","*");
+        $this->apiReturn("sucesso","",$res);
+    }
+    public function _actionGetMovies(){
+        $res = $this->model->getData("cinema","*");
+        $this->apiReturn("sucesso","",$res);
+    }
 
     public function _actionBuscaEstabelecimento(){
         $coords = json_decode($_REQUEST['objeto'],true);

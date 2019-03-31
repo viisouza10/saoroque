@@ -1,5 +1,11 @@
 page-home,
 .home {
+  sup{
+    left: -0.3em;
+  }
+  .align-bottom{
+    bottom:20%;
+  }
   .scroll-content {
     padding-bottom: 5rem;
   }
@@ -8,8 +14,21 @@ page-home,
     position: fixed;
     width: 100%;
     left: 0;
-    top: 1rem;
-
+    top: 2%;
+    input{
+      margin:11px 8px 11px 3px;
+      font-size:1.3em;
+    }
+    input::placeholder{
+      color: color($colors, primary);
+    }
+    .round{
+      border-radius: 30px;
+    }
+    ion-icon.icon-ios-primary{
+      font-size: 1.7em;
+      margin-top: .2em;
+    }
     button {
       position: absolute;
       margin: 0.4rem 0.2rem;
@@ -17,14 +36,25 @@ page-home,
       top: 1.2rem;
       height: 2.4em;
       box-shadow: none;
-
+      border-radius: 30px;
       &.activated {
         background: none;
       }
     }
+    .btn-buscar{
+      background: color($colors,primary);
+      position: absolute;
+      top: 0.6em;
+      left: 28.4rem;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 1.5em;
+    }
 
     ion-input {
       padding-left: 5rem;
+      box-shadow: 1px 1px 20px 0px #000;
     }
     #card-header {
       background-position: center;
@@ -33,17 +63,43 @@ page-home,
   }
 
   .header {
-    height: 30%;
-    background: url("../assets/img/home_header.jpg");
+    height: 45%;
+    background: url(../assets/img/home_header.png);
     background-size: 100% auto;
+    background-repeat: no-repeat;
+    font-weight: 800;
+    strong{
+      font-size: 1.1em;
+    }
+    h1{
+      font-size: 2.5em;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+    }
+    .temperatura{
+      color: color($colors, light);
+      font-size: .7em;
+      margin-right: 0.1em;
+      margin-left: .5em;
+    }
   }
 
   // list of items
   .block-title {
     line-height: 2rem;
-
+    font-weight: bold;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .pull-left{
+      display:flex;
+      align-items: center;
+    }
     ion-icon {
-      font-size: 2rem;
+      font-size: 5rem;
+      margin-right: 0.1em;
     }
   }
 
@@ -56,8 +112,9 @@ page-home,
       width: 25rem;
       display: inline-block;
       margin-right: 1.6rem;
-      color:#fff;
-
+      h5{
+        color:color($colors,light);
+      }
       .card-header {
         width: 100%;
         height: 12rem;
@@ -84,6 +141,10 @@ page-home,
     .float-search {
       button {
         top: 1.6rem;
+      }
+      .btn-buscar {
+        top: 1.3rem;
+        left: 66.5%;
       }
 
       ion-input {

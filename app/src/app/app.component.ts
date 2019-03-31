@@ -6,13 +6,13 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 
 // import pages
 import {HomePage} from '../pages/home/home';
+import {RegisterPage} from '../pages/register/register';
 import {LoginPage} from '../pages/login/login';
-import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {SettingPage} from '../pages/setting/setting';
 import {FindFriendPage} from '../pages/find-friend/find-friend';
 import {HotelsPage} from '../pages/hotels/hotels';
 import {RestaurantsPage} from '../pages/restaurants/restaurants';
-import {AttractionsPage} from '../pages/attractions/attractions';
+import { MainTabsPage } from "../pages/main-tabs/main-tabs";
 // end import pages
 
 @Component({
@@ -53,12 +53,6 @@ export class MyApp {
     },
 
     {
-      title: 'Attractions',
-      count: 0,
-      component: AttractionsPage
-    },
-
-    {
       title: 'Settings',
       count: 0,
       component: SettingPage
@@ -75,9 +69,9 @@ export class MyApp {
   ];
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    this.rootPage = HomePage;
+    // this.rootPage = HomePage;
     // this.rootPage = RegisterPage;
-
+    this.rootPage = HomePage;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

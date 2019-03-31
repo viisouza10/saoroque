@@ -1,0 +1,10 @@
+page-place-detail,
+.item-detail {
+    // import extends css
+    $color-bar: color($colors, primary);
+    @import "../../theme/circle_progress";
+    .item-header{
+      background-position: center;
+      background-size: cover;
+    }
+  }
