@@ -1,23 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary">
+  </ion-navbar>
+</ion-header>
 <ion-content padding-bottom>
-  <div class="header events">
+  <div class="topo events" [ngClass]="{'movies': activity == 'movies'}">
     <h1 ion-text color="white">
       ATIVIDADES
     </h1>
     <div>
-      <img src="../../assets/img/icon_movies.png" alt="" class="icon-white"
-        [ngClass]="{'icon-white': activity != 'movies'}" (click)="setActivity('movies')">
-      <img src="../../assets/img/icon_events.png" alt="" class="icon-white"
-        [ngClass]="{'icon-white': activity != 'events'}" (click)="setActivity('events')">
+      <div class="box-icon-movies">
+        <img src="../../assets/img/icon_movies.png" alt="" class="icon-white"
+          [ngClass]="{'icon-white': activity != 'movies'}" (click)="setActivity('movies')">
+        <h1 [ngClass]="{'color-white': activity != 'movies'}">Cinema</h1>
+      </div>
+      <div class="box-icon-events">
+        <img src="../../assets/img/icon_events.png" alt="" class="icon-white"
+          [ngClass]="{'icon-white': activity != 'events'}" (click)="setActivity('events')">
+        <h1 [ngClass]="{'color-white': activity != 'events'}">Eventos</h1>
+      </div>
     </div>
   </div>
-  <div [ngSwitch]="activity">
+  <div [ngSwitch]="activity" padding>
     <ion-list *ngSwitchCase="'events'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
-        <h2>Ruby</h2>
-      </ion-item>
+      <div *ngFor="let item of events" class="box-events">
+        <div class="box-img">
+          <img src="{{item.photo}}" alt="">
+        </div>
+        <div class="box-info">
+          <h6>{{item.dia}}/{{item.mes}} - {{item.name}}</h6>
+          <p>Local:{{item.local}}</p>
+          <p>Horário:{{item.horario}}</p>
+        </div>
+      </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'movies'">
@@ -28,7 +42,7 @@
         <div class="box-info">
           <h6>{{item.name}}</h6>
           <p>{{item.diassemana}}</p>
-          <button>Comprar agora</button>
+          <!-- <button>Comprar agora</button> -->
         </div>
       </div>
     </ion-list>

@@ -79,11 +79,10 @@ export class HomePage {
               icons:["ios-videocam-outline","ios-closed-captioning-outline"],
               data:res[2],
               handleAll:()=>{
-                console.log("go filmes")
                 this.nav.push(ActivityPage, { attractions:this.attractions,activity:'movies' });
               },
               handle:(item)=>{
-                this.nav.push(PlaceDetailPage, { item });
+                this.nav.push(ActivityPage, { attractions:this.attractions,activity:'movies' });
               }
             })
             this.categories.push({
@@ -94,7 +93,7 @@ export class HomePage {
                 this.nav.push(ActivityPage, { attractions:this.attractions,activity:'events' });
               },
               handle:(item)=>{
-                this.nav.push(PlaceDetailPage, { item });
+                this.nav.push(ActivityPage, { attractions:this.attractions,activity:'events' });
               }
             })
             this.categories.push({
@@ -121,6 +120,9 @@ export class HomePage {
                   break;
                 case "clear_night":
                   this.clima = "moon";
+                  break;
+                case "cloudly_day":
+                  this.clima = "sunny";
                   break;
 
                 default:

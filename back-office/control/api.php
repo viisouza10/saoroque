@@ -61,7 +61,7 @@ class api extends simplePHP {
     }
 
     public function _actionGetEvents(){
-        $res = $this->model->getData("eventos","*");
+        $res = $this->model->getData("eventos","*",'','','a.id asc');
         $this->apiReturn("sucesso","",$res);
     }
     public function _actionGetMovies(){

@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="items" padding-left padding-bottom>
-      <div class="card round primary-bg" color="primary" *ngFor="let iten of cat.data | slice:0:5;" (click)="open(iten)">
+      <div class="card round primary-bg" color="primary" *ngFor="let iten of cat.data | slice:0:5;" (click)="cat.handle(iten)">
         <div class="card-header"  [ngStyle]="{'background-image': 'url(' + iten.photo + ')'}"></div>
         <div class="padding-xs" color="primary">
           <h5>{{ iten.name }}</h5>

@@ -1,6 +1,6 @@
 page-activity,
 .activity {
-  .header {
+  .topo {
     height: 35%;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -22,6 +22,9 @@ page-activity,
     img.icon-white {
       filter: brightness(0) invert(1);
     }
+    .color-white {
+      color: #fff !important;
+    }
     &:after {
       content: "";
       position: absolute;
@@ -34,13 +37,24 @@ page-activity,
       top: 15%;
     }
   }
-  .header.events {
+  .topo.events {
     background-image: url(../assets/img/events_header.png);
     display: flex;
     flex-direction: column;
   }
-  .header.movies {
-    background-image: url(../assets/img/events_header.png);
+  .topo.movies {
+    background-image: url(../assets/img/movies_header.png);
+  }
+  .topo {
+    .box-icon-movies,
+    .box-icon-events {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      h1 {
+        color: #ffb500;
+      }
+    }
   }
   .box-movies {
     display: flex;
@@ -49,7 +63,7 @@ page-activity,
     .box-img {
       height: 295px;
       overflow: hidden;
-      margin: 3%;
+      margin: 3% 3% 3% 0; 
       img {
         transform: scale(1.1);
         height: 312px;
@@ -58,8 +72,9 @@ page-activity,
     .box-info {
       font-weight: bold;
       color: #898989;
-      h6{
-        color:color($colors,primary)
+      margin-top: 3%;
+      h6 {
+        color: color($colors, primary);
       }
       button {
         color: #fff;
@@ -71,8 +86,8 @@ page-activity,
     div {
       width: 50%;
     }
-    &:after{
-      content: "";
+    &:after {
+      // content: "";
       width: 30%;
       height: 1px;
       position: absolute;
@@ -81,6 +96,27 @@ page-activity,
       right: 0;
       margin: 0 auto;
       top: 100%;
+    }
+  }
+
+  .box-events {
+    display: flex;
+    margin-bottom: 5%;
+    font-size: 1em;
+    color: #444;
+    .box-img{
+      width: 40%;
+      margin-right: 2%;
+      img{
+        width: 175px;
+        height: 105px;
+      }
+    }
+    .box-info{
+      width: 60%;
+    }
+    h6 {
+      color: color($colors, primary);
     }
   }
 

@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "happens.keystore",
+            "storePassword": "001122",
+            "alias": "happens",
+            "password" : "001122",
+            "keystoreType": ""
+        }
+    }
+}
