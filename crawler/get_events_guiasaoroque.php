@@ -25,9 +25,9 @@ include('simple_html_dom.php');
 $html = file_get_html('https://www.guiasaoroque.com.br/eventos/index.asp');
  //SALVAR NO BANCO DE DADOS
  $servername = "localhost";
- $username = "root";
- $password = "979899";
- $dbname = "saoroque_com_br";
+ $username = "vinic952";
+ $password = "Champions5@";
+ $dbname = "vinic952_sao_roque";
 
  // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
