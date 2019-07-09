@@ -62,7 +62,10 @@ foreach($html->find('div.box-evento') as $e){
     $mesStr = $e->find('div.data-box-evento p.mes-data')[0]->innertext;
     $mes = $meses[$mesStr];
     $data_evento = "2019-".$mes."-".$dia;
+    $conn->set_charset("utf8");
     $stmt->execute();
 }
+$stmt->close();
+$conn->close();
 die("fim");
 ?>

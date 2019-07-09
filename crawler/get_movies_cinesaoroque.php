@@ -12,9 +12,9 @@ $html = file_get_html('http://www.cinesaoroque.com.br/index.php');
 
  //SALVAR NO BANCO DE DADOS
  $servername = "localhost";
- $username = "root";
- $password = "979899";
- $dbname = "saoroque_com_br";
+ $username = "vinic952";
+ $password = "Champions5@";
+ $dbname = "vinic952_sao_roque";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -46,9 +46,10 @@ foreach($html->find('div.g-array-item-image a') as $e){
     $video = trim($htmlDetail->find('div[itemprop="articleBody"] p img[src*="legendas"]')[1]->src);//video
     $classificacao = trim($htmlDetail->find('div[itemprop="articleBody"] p img[src*="legendas"]')[2]->src);//classificacao
     $linkTrailer = trim($htmlDetail->find('div.video-responsive iframe')[0]->src);//link trailer filme
+    $conn->set_charset("utf8");
     $stmt->execute();
 }
-die("fim");
 $stmt->close();
 $conn->close();
+die("fim");
 ?>
