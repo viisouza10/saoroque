@@ -28,10 +28,10 @@ if($_SERVER['HTTP_HOST'] == TEST_URL) {
 if(in_array($_SERVER['HTTP_HOST'], $PRODUCTION_URLS)) {
     $dsn = array(
         'phptype'  => 'mysql',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'vinic952',
+        'password' => 'Champions5@',
         'hostspec' => '127.0.0.1',
-        'database' => 'saoroque_com_br',
+        'database' => 'vinic952_sao_roque',
         'charset'  => 'utf8mb4',
     );
 }

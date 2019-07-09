@@ -1,19 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/timeout';
+import { Injectable } from "@angular/core";
+import { Http, URLSearchParams } from "@angular/http";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
+import "rxjs/add/operator/timeout";
 
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { Network } from '@ionic-native/network';
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject
+} from "@ionic-native/file-transfer";
+import { Network } from "@ionic-native/network";
 
-import { ToastController } from 'ionic-angular';
+import { ToastController } from "ionic-angular";
 
 @Injectable()
 export class SimplejsProvider {
-
   /*
-    Para funcionar corretamento o SIMPLETS é necessario 
+    Para funcionar corretamento o SIMPLETS é necessario
     instalar no projeto todas as bibliotecas que estão
     no @ionic-native e coloca-las no app.module
   */
@@ -23,9 +26,8 @@ export class SimplejsProvider {
 
   toast: any;
 
-
-  urlAPI: string = 'http://saoroque.mac/api'; //Local
- 
+  // urlAPI: string = 'http://saoroque.mac/api'; //Local
+  urlAPI: string = "http://apisr.happensit.com.br/api"; //Prod
 
   constructor(
     public http: Http,
@@ -33,105 +35,105 @@ export class SimplejsProvider {
     public toastCtrl: ToastController,
     private transfer: FileTransfer
   ) {
-
     this.network.onDisconnect().subscribe(() => {
       this.toast = this.toastCtrl.create({
-        message: 'Foi identificado que sua conexão com a Internet foi encerrada.',
-        position: 'top'
+        message:
+          "Foi identificado que sua conexão com a Internet foi encerrada.",
+        position: "top"
       });
       this.toast.present();
     });
 
     this.network.onConnect().subscribe(() => {
-      this.toast.dismiss()
+      this.toast.dismiss();
     });
-
   }
 
-  postApi(path:String, obj) {
+  postApi(path: String, obj) {
     let filtro = new URLSearchParams();
-    
-    filtro.append('objeto', JSON.stringify(obj));
+
+    filtro.append("objeto", JSON.stringify(obj));
     console.log(filtro);
-    
+
     return this.http
       .post(`${this.urlAPI}/${path}/`, filtro)
       .timeout(10000)
-      .map((res) => res)
+      .map(res => res)
       .toPromise()
-      .then((sucess) => { 
+      .then(sucess => {
         return JSON.parse((<any>sucess)._body);
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.name == "TimeoutError" || (err.status == 0 && err.type == 3)) {
-          err.mensagem = "Ocorreu uma falha de comunicação, tente novamente mais tarde ou verifique sua conexão com a internet"
+          err.mensagem =
+            "Ocorreu uma falha de comunicação, tente novamente mais tarde ou verifique sua conexão com a internet";
         }
-        return err
-      })
+        return err;
+      });
   }
 
   getApi(path) {
     return this.http
       .get(`${this.urlAPI}/${path}/`)
       .timeout(10000)
-      .map((res) => res)
+      .map(res => res)
       .toPromise()
-      .then((sucess) => {
-        return JSON.parse((<any>sucess)._body)
+      .then(sucess => {
+        return JSON.parse((<any>sucess)._body);
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.name == "TimeoutError") {
-          err.mensagem = "Ocorreu uma falha de comunicação, tente novamente mais tarde ou verifique sua conexão com a internet"
+          err.mensagem =
+            "Ocorreu uma falha de comunicação, tente novamente mais tarde ou verifique sua conexão com a internet";
         }
-        return err
-      })
+        return err;
+      });
   }
 
   getCEP(numCep: number) {
     return this.http
       .get(`http://cep.alphacode.com.br/action/cep/${numCep}`)
-      .map((res) => res)
+      .map(res => res)
       .toPromise()
-      .then((sucess) => {
-        return JSON.parse((<any>sucess)._body)
+      .then(sucess => {
+        return JSON.parse((<any>sucess)._body);
       })
-      .catch((err) => {
-        console.error(err)
-        return err
-      })
+      .catch(err => {
+        console.error(err);
+        return err;
+      });
   }
 
   uploadFile(fileURL) {
-
     let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
+      fileKey: "file",
+      fileName: fileURL.substr(fileURL.lastIndexOf("/") + 1),
       params: {
         id: this.user.id
       }
-    }
+    };
 
     const fileTransfer: FileTransferObject = this.transfer.create();
 
     fileTransfer
       .upload(fileURL, encodeURI(this.urlAPI + "/UploadFile"), options)
-      .then((data) => {
+      .then(data => {
         console.log(data);
-        let imagem = JSON.parse(data.response)
+        let imagem = JSON.parse(data.response);
         this.avatar = imagem.data;
-        localStorage.setItem('lazerecultura.avatar', this.avatar);
+        localStorage.setItem("lazerecultura.avatar", this.avatar);
       })
-      .catch((error) => {
+      .catch(error => {
         this.avatar = false;
-        console.error(error)
+        console.error(error);
       });
-
   }
 
   validarCPF(cpf: string) {
     return new Promise((resolve, reject) => {
-      cpf = cpf.replace(/[^\d]+/g, '');
-      if (cpf.length != 11 ||
+      cpf = cpf.replace(/[^\d]+/g, "");
+      if (
+        cpf.length != 11 ||
         cpf == "00000000000" ||
         cpf == "11111111111" ||
         cpf == "22222222222" ||
@@ -141,8 +143,9 @@ export class SimplejsProvider {
         cpf == "66666666666" ||
         cpf == "77777777777" ||
         cpf == "88888888888" ||
-        cpf == "99999999999") {
-        reject('error');
+        cpf == "99999999999"
+      ) {
+        reject("error");
         return false;
       }
 
@@ -155,7 +158,7 @@ export class SimplejsProvider {
         rev = 0;
       }
       if (rev != parseInt(cpf.charAt(9))) {
-        reject('error');
+        reject("error");
         return false;
       }
 
@@ -164,17 +167,14 @@ export class SimplejsProvider {
         add += parseInt(cpf.charAt(i)) * (11 - i);
       }
       rev = 11 - (add % 11);
-      if (rev == 10 || rev == 11)
-        rev = 0;
+      if (rev == 10 || rev == 11) rev = 0;
       if (rev != parseInt(cpf.charAt(10))) {
-        reject('error');
+        reject("error");
         return false;
       }
 
-      resolve('sucesso');
+      resolve("sucesso");
       return true;
-
-    })
+    });
   }
-
 }

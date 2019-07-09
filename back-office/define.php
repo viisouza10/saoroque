@@ -27,10 +27,12 @@ if($_SERVER['HTTP_HOST'] == TEST_URL) {
 }
 
 if(in_array($_SERVER['HTTP_HOST'], $PRODUCTION_URLS)) {
-	error_reporting(0);
-    define('SIMPLEPHP_PATH', '/var/www/SimplePHP/');
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ERROR | E_PARSE);
+
+    define('SIMPLEPHP_PATH', '/home/vinic952/public_html/SimplePHP/');
     define('SOFTWAREVERSION', 'São Roque ERP');
-    define('CONTACT_EMAIL', 'viisouza10@live.com');
 }
 
 define('URL', 'http://'.$_SERVER['HTTP_HOST'].'/');
