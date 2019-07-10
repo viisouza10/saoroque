@@ -31,7 +31,7 @@ if ($conn->connect_error) {
 
 
 // $stmt = $conn->prepare("TRUNCATE cinema");
-$stmt->execute();
+// $stmt->execute();
 //  prepare and bind
  $stmt = $conn->prepare("INSERT INTO cinema (name,photo,urlIngresso,diasSemana,descricao,audio,video,classificacao,linkTrailer,idVideo) VALUES (?,?,?,?,?,?,?,?,?,?)");
  $stmt->bind_param("ssssssssss", $titulo,$photo,$urlIngresso,$diasSemana,$descricao,$audio,$video,$classificacao,$linkTrailer,$idVideo);
