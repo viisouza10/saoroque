@@ -13,14 +13,14 @@ include('simple_html_dom.php');
 $html = file_get_html('http://www.cinesaoroque.com.br/index.php');
 
  //SALVAR NO BANCO DE DADOS
-//  $servername = "localhost";
-//  $username = "vinic952";
-//  $password = "Champions5@";
-//  $dbname = "vinic952_sao_roque";
  $servername = "localhost";
- $username = "localhost";
- $password = "979899";
+ $username = "vinic952";
+ $password = "Champions5@";
  $dbname = "vinic952_sao_roque";
+//  $servername = "localhost";
+//  $username = "localhost";
+//  $password = "979899";
+//  $dbname = "vinic952_sao_roque";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -30,7 +30,7 @@ if ($conn->connect_error) {
 }
 
 
-$stmt = $conn->prepare("TRUNCATE cinema");
+// $stmt = $conn->prepare("TRUNCATE cinema");
 $stmt->execute();
 //  prepare and bind
  $stmt = $conn->prepare("INSERT INTO cinema (name,photo,urlIngresso,diasSemana,descricao,audio,video,classificacao,linkTrailer,idVideo) VALUES (?,?,?,?,?,?,?,?,?,?)");
