@@ -13,11 +13,14 @@ include('simple_html_dom.php');
 $html = file_get_html('http://www.cinesaoroque.com.br/index.php');
 
  //SALVAR NO BANCO DE DADOS
+//  $servername = "localhost";
+//  $username = "vinic952";
+//  $password = "Champions5@";
+//  $dbname = "vinic952_sao_roque";
  $servername = "localhost";
- $username = "vinic952";
- $password = "Champions5@";
+ $username = "localhost";
+ $password = "979899";
  $dbname = "vinic952_sao_roque";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -29,9 +32,9 @@ if ($conn->connect_error) {
 
 $stmt = $conn->prepare("TRUNCATE cinema");
 $stmt->execute();
- // prepare and bind
- $stmt = $conn->prepare("INSERT INTO cinema (name,photo,urlIngresso,diasSemana,descricao,audio,video,classificacao,linkTrailer) VALUES (?,?,?,?,?,?,?,?,?)");
- $stmt->bind_param("sssssssss", $titulo,$photo,$urlIngresso,$diasSemana,$descricao,$audio,$video,$classificacao,$linkTrailer);
+//  prepare and bind
+ $stmt = $conn->prepare("INSERT INTO cinema (name,photo,urlIngresso,diasSemana,descricao,audio,video,classificacao,linkTrailer,idVideo) VALUES (?,?,?,?,?,?,?,?,?,?)");
+ $stmt->bind_param("ssssssssss", $titulo,$photo,$urlIngresso,$diasSemana,$descricao,$audio,$video,$classificacao,$linkTrailer,$idVideo);
 
 // find all div tags with id=gbar
 foreach($html->find('div.g-array-item-image a') as $e){
@@ -48,6 +51,7 @@ foreach($html->find('div.g-array-item-image a') as $e){
     $video = trim($htmlDetail->find('div[itemprop="articleBody"] p img[src*="legendas"]')[1]->src);//video
     $classificacao = trim($htmlDetail->find('div[itemprop="articleBody"] p img[src*="legendas"]')[2]->src);//classificacao
     $linkTrailer = trim($htmlDetail->find('div.video-responsive iframe')[0]->src);//link trailer filme
+    $idVideo = (int)split("-",split("/index.php/filmes-cartaz/",$e->href)[1])[0];
     $conn->set_charset("utf8");
     $stmt->execute();
 }
